@@ -9,7 +9,6 @@ namespace GoldenDragonCup
     {
         public int id;
         public int clubId;
-        public int weightClassId;
         public int age;
 
         public string name;
@@ -25,20 +24,19 @@ namespace GoldenDragonCup
 
         public Fighter() { }
 
-        public Fighter(int weightClassId, int age, string name, float weight, string gender, bool fullContact)
+        public Fighter(int age, string name, float weight, string gender, bool fullContact)
         {
-            this.initializeFighter(weightClassId, age, name, weight, gender, fullContact);
+            this.initializeFighter(age, name, weight, gender, fullContact);
         }
 
-        public Fighter(int clubId, int weightClassId, int age, string name, float weight, string gender, bool fullContact)
+        public Fighter(int clubId, int age, string name, float weight, string gender, bool fullContact)
         {
             this.clubId = clubId;
-            this.initializeFighter(weightClassId, age, name, weight, gender, fullContact);
+            this.initializeFighter(age, name, weight, gender, fullContact);
         }
 
-        private void initializeFighter(int weightClassId, int age, string name, float weight, string gender, bool fullContact)
+        private void initializeFighter(int age, string name, float weight, string gender, bool fullContact)
         {
-            this.weightClassId = weightClassId;
             this.age = age;
             this.name = name;
             this.weight = weight;
