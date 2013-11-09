@@ -13,7 +13,7 @@ namespace GoldenDragonCup
 
         public string name;
         public float weight;
-        public string gender; // M or V
+        public bool gender; // true = man, false = woman
         public bool fullContact; // true = Sanda, false = Shinda
         public bool adult;
 
@@ -24,18 +24,18 @@ namespace GoldenDragonCup
 
         public Fighter() { }
 
-        public Fighter(int age, string name, float weight, string gender, bool fullContact)
+        public Fighter(int age, string name, float weight, bool gender, bool fullContact)
         {
             this.initializeFighter(age, name, weight, gender, fullContact);
         }
 
-        public Fighter(int clubId, int age, string name, float weight, string gender, bool fullContact)
+        public Fighter(int clubId, int age, string name, float weight, bool gender, bool fullContact)
         {
             this.clubId = clubId;
             this.initializeFighter(age, name, weight, gender, fullContact);
         }
 
-        private void initializeFighter(int age, string name, float weight, string gender, bool fullContact)
+        private void initializeFighter(int age, string name, float weight, bool gender, bool fullContact)
         {
             this.age = age;
             this.name = name;

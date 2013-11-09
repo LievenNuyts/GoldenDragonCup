@@ -23,7 +23,7 @@ namespace GoldenDragonCup
             this.weightClasses.Add(weightClass);
         }
         
-        public void addWeightClass(float lowerLimit, float upperLimit, bool fullContact, string gender, bool adult)
+        public void addWeightClass(float lowerLimit, float upperLimit, bool fullContact, bool gender, bool adult)
         {
             WeightClass weightClass = new WeightClass(lowerLimit, upperLimit, fullContact, gender, adult, this);
             this.weightClasses.Add(weightClass);

@@ -12,7 +12,7 @@ namespace GoldenDragonCup
         public int id;
         public float lowerLimit;
         public float upperLimit;
-        public string gender;
+        public bool gender;
         public bool fullContact;
         public bool adult;
 
@@ -26,7 +26,7 @@ namespace GoldenDragonCup
 
         public WeightClass() { }
 
-        public WeightClass(float lowerLimit, float upperLimit, bool fullContact, string gender, bool adult, Tournament tournament)
+        public WeightClass(float lowerLimit, float upperLimit, bool fullContact, bool gender, bool adult, Tournament tournament)
         {
             this.lowerLimit = lowerLimit;
             this.upperLimit = upperLimit;
