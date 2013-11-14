@@ -19,6 +19,7 @@ namespace GoldenDragonCup
             this.name = name;
             this.trainer = trainer;
             this.address = address;
+            this.id = idManager.getNewClubId();
         }
     }
 }

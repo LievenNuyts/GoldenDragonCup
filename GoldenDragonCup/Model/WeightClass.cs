@@ -34,6 +34,7 @@ namespace GoldenDragonCup
             this.gender = gender;
             this.adult = adult;
             this.tournament = tournament;
+            this.id = idManager.getNewWeightclassId();
 
             weightClassFighters = new List<Fighter>();
             fights = new List<Fight>();

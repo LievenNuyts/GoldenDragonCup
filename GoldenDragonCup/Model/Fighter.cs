@@ -42,6 +42,7 @@ namespace GoldenDragonCup
             this.weight = weight;
             this.gender = gender;
             this.fullContact = fullContact;
+            this.id = idManager.getNewFighterId();
 
             if (age >= 18)
             {
