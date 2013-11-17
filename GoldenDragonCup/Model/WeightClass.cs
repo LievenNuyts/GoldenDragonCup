@@ -10,16 +10,16 @@ namespace GoldenDragonCup
     class WeightClass
     {
         public int id;
-        public float lowerLimit;
-        public float upperLimit;
+        public float lowerLimit; //low border weight of the weightclass
+        public float upperLimit; //high border weight of the weightclass
         public bool gender;
-        public bool fullContact;
-        public bool adult;
+        public bool fullContact; //true if this is a fullcontact (sanda) weightclass
+        public bool adult; //true if this is a category for 18+
 
-        public List<Fighter> weightClassFighters;
-        public List<Fight> fights;
+        public List<Fighter> weightClassFighters; //list of all fighters in this weightclass
+        public List<Fight> fights; //list of fights (=matched fighters). Will be expanded after each finished round
 
-        public int roundIndex = 1;
+        public int roundIndex = 1; // first round = X matches. When these x matches are finished the index will become 2 and so on
 
         public Tournament tournament;
 
@@ -40,6 +40,8 @@ namespace GoldenDragonCup
             fights = new List<Fight>();
         }
 
+        //methode that select all qualified fighters from the tournament fighter list for this weightclass
+        //based on weight, fullcontact, gender and adult
         public void selectTournamentFighters()
         {
             foreach (Fighter fighter in this.tournament.allFighters)
@@ -52,6 +54,7 @@ namespace GoldenDragonCup
             }
         }
 
+        //method that will calculate all the fights for the current round - UNDER CONSTRUCTION
         public void calculateRound()
         {
             if (weightClassFighters != null)

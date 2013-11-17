@@ -7,11 +7,14 @@ namespace GoldenDragonCup
 {
     class Fight
     {
+        //WILL PROBABLY BE REPLACED BY FIGHTVIEW CLASS
+        
         public int fighter1;
         public int fighter2;
         public int winner;
         public bool inProgress;
         public int roundIndex;
+        public string fightName;
 
         public Fight() { }
 

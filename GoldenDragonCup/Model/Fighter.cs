@@ -8,19 +8,20 @@ namespace GoldenDragonCup
     class Fighter
     {
         public int id;
-        public int clubId;
+        public int clubId; 
         public int age;
 
         public string name;
         public float weight;
         public bool gender; // true = man, false = woman
         public bool fullContact; // true = Sanda, false = Shinda
-        public bool adult;
+        public bool adult; //true if 18 or older
 
-        public int tournamentRanking;
-        public int freeMatchCounter;
-        public bool isActive = true;
-        public bool isSelected;
+        public int tournamentRanking; //defines the ranking in the weightclass at the end of the tournament (1st, 2nd, 3rd, ...)
+        public int freeMatchCounter; //value of how many free matches the fighter has had this tournament
+        public bool isActive = true; //true if the fighter is still in competition. Fighters who have lost will be put on 'false'
+        public bool isSelected; //true if the fighter is selected for a fight in the actual round of the competition. 
+                                //This is only used when the entire fight round is calculated
 
         public Fighter() { }
 
@@ -35,6 +36,7 @@ namespace GoldenDragonCup
             this.initializeFighter(age, name, weight, gender, fullContact);
         }
 
+        //method to load constructor parameters into class variables - used in class constructors
         private void initializeFighter(int age, string name, float weight, bool gender, bool fullContact)
         {
             this.age = age;
