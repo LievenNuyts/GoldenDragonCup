@@ -7,11 +7,11 @@ using GoldenDragonCup;
 
 namespace GoldenDragonCup
 {
-    class WeightClass
+    public class WeightClass
     {
         public int id;
-        public float lowerLimit; //low border weight of the weightclass
-        public float upperLimit; //high border weight of the weightclass
+        public float lowerLimit; //lower border weight of the weightclass
+        public float upperLimit; //higher border weight of the weightclass
         public bool gender;
         public bool fullContact; //true if this is a fullcontact (sanda) weightclass
         public bool adult; //true if this is a category for 18+

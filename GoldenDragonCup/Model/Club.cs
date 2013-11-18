@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GoldenDragonCup
 {
-    class Club
+    public class Club
     {
         public int id;
         public string name; //name of the club

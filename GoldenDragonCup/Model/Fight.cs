@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GoldenDragonCup
 {
-    class Fight
+    public class Fight
     {
         //WILL PROBABLY BE REPLACED BY FIGHTVIEW CLASS
         

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GoldenDragonCup
 {
-    class Fighter
+    public class Fighter
     {
         public int id;
         public int clubId; 

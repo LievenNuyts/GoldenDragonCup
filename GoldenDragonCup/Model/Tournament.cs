@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GoldenDragonCup
 {
-    class Tournament
+    public class Tournament
     {
         public ArrayList weightClasses; //list of the weightclasses that are available in the competition
         public ArrayList allFighters; //list of all the fighters who have entered the competition
