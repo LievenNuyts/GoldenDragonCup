@@ -12,5 +12,6 @@
                 </Grid.ColumnDefinitions>
             </Grid>
         </GroupBox>
+        <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="71,148,0,0" Name="label1" VerticalAlignment="Top" Width="91" />
     </Grid>
 </Window>

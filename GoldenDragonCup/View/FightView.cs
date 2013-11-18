@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 
 namespace GoldenDragonCup.View
 {
+    // !! ALLE ELEMENTEN NOG PLAATSEN !!
+    
     public class FightView : GroupBox //is a type of GroupBox
     {
         public Tournament tournament;
@@ -29,6 +31,7 @@ namespace GoldenDragonCup.View
         public string fightName; // = Weightclass + gender + fullcontact + round
            
         public Button btn_fighter1, btn_fighter2;
+        public Label lbl_text, lbl_winner;
         public Grid grid;
    
         public FightView(){}
@@ -53,6 +56,11 @@ namespace GoldenDragonCup.View
             //dimensions of the group box
             this.Width = 150;
             this.Height = 150;
+
+            //initialise labels
+            lbl_text = new Label();
+            lbl_text.Content = "Winner:";
+            lbl_winner = new Label();
 
             //initialise buttons and grid
             btn_fighter1 = new Button();
@@ -93,34 +101,62 @@ namespace GoldenDragonCup.View
             }
         }
 
-
         //external way to set the position of groupbox on mainwindow tabcontrol
         public void setPosition(int x, int y)
         {
             //
         }
 
-
         //events for buttons
         private void btn_fighter1_Click(object sender, RoutedEventArgs e)
         {
             //MessageBox.Show("jeuuuuj1");
             winnerID = fighter1ID;
+            lbl_winner.Content = btn_fighter1.Content;
         }
 
         private void btn_fighter2_Click(object sender, RoutedEventArgs e)
         {
             //MessageBox.Show("jeuuuuj2");
             winnerID = fighter2ID;
+            lbl_winner.Content = btn_fighter2.Content;
         }
 
         //method to make a string summary of the fight for the fightoverview pane
         public override string ToString()
         {
-            return base.ToString();
+            string manWoman;
+            string fullContact;
+            string winner;
 
-            //CODE
+            if(weightClass.gender == true)
+            {
+                manWoman = "M";
+            }
+            else
+            {
+                manWoman = "W";
+            }
+
+            if(weightClass.fullContact == true)
+            {
+                fullContact = "Full";
+            }
+            else
+            {
+                fullContact = "Semi";
+            }
+            if (lbl_winner.Content != "")
+            {
+                winner = " *** ";
+            }
+            else
+            {
+                winner = lbl_winner.Content.ToString();
+            }
+
+            return manWoman + " " + fullContact + " " + weightClass.lowerLimit + "+ :" + 
+                    btn_fighter1.Content + " - " + btn_fighter2.Content + ": Winner = " + winner;
         }
-
     }
 }
