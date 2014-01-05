@@ -28,12 +28,24 @@ namespace GoldenDragonCup
             var fileName = string.Format("{0}\\gdc.xls", Directory.GetCurrentDirectory());
             var connectionString = string.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;", fileName);
 
-            var adapter = new OleDbDataAdapter("SELECT * FROM [Sheet1$]", connectionString);
+            var adapter = new OleDbDataAdapter("SELECT * FROM [Blad1$]", connectionString);
             var ds = new DataSet();
 
-            adapter.Fill(ds, "anyNameHere");
+            adapter.Fill(ds);
 
-            DataTable data = ds.Tables["anyNameHere"];
+            DataTable data = ds.Tables[0];
+            foreach (DataRow row in data.Rows)
+            {
+                string name = row["Naam"].ToString();
+                string lastName = row["Voornaam"].ToString();
+                string dob = row["Geboorte-datum"].ToString();
+                string discipline = row["Discipline"].ToString();
+                string weight = row["Gewicht"].ToString();
+                string club = row["Club"].ToString();
+                string location = row["Locatie"].ToString();
+                string type = row["Type"].ToString();
+                string category = row["Categorie"].ToString();
+            }
         }
 
     }
