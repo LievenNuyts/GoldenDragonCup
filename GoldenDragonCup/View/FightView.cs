@@ -18,6 +18,8 @@ namespace GoldenDragonCup.View
     
     public class FightView : GroupBox //is a type of GroupBox
     {
+        //update to test github
+        
         public Tournament tournament;
         public WeightClass weightClass;
         
