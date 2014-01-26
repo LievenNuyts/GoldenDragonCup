@@ -1,17 +1,13 @@
 ﻿<Window x:Class="GoldenDragonCup.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="152,60,0,0" Name="button1" VerticalAlignment="Top" Width="75" />
-        <GroupBox Header="groupBox1" Height="100" HorizontalAlignment="Left" Margin="267,88,0,0" Name="groupBox1" VerticalAlignment="Top" Width="200">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30*" />
-                    <ColumnDefinition Width="158*" />
-                </Grid.ColumnDefinitions>
-            </Grid>
-        </GroupBox>
-        <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="71,148,0,0" Name="label1" VerticalAlignment="Top" Width="91" />
+        Title="MainWindow" Height="442" Width="693" WindowState="Maximized">
+    <Grid Name="mainGrid" Background="#FF4B0000">
+        <TabControl Height="Auto" HorizontalAlignment="Stretch" Name="tabControl" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="0,0,265,0">
+            <TabItem Header="Controls" Name="Controls">
+                <Grid Name="ControlGrid" Background="Crimson" />
+            </TabItem>
+        </TabControl>
+        <ListBox HorizontalAlignment="Right" Name="lstb_fights" VerticalAlignment="Stretch" Width="259" Background="Firebrick" />
     </Grid>
 </Window>
