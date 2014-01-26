@@ -18,13 +18,13 @@ namespace GoldenDragonCup
         public List<Fighter> weightClassFighters; //list of all fighters in this weightclass
         public List<List<FightView>> rounds;
 
-        
+        /*
         public List<FightView> round1; //list of fights (=matched fighters). Will be expanded after each finished round
         public List<FightView> round2;
         public List<FightView> round3;
         public List<FightView> round4;
         public List<FightView> round5;
-        public List<FightView> round6;
+        public List<FightView> round6;*/
 
         public Tournament tournament;
 

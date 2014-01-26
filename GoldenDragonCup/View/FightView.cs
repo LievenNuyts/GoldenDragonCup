@@ -183,8 +183,104 @@ namespace GoldenDragonCup.View
 
         private void btn_confirm_Click(object sender, RoutedEventArgs e)
         {
-            // write code
+            if (winner != null)
+            {
+                FighterToNextRound(winner);
+            }
         }
+
+        //method that transfers winner to next round
+        private void FighterToNextRound(Fighter fighter)
+        {
+            try
+            {
+
+                int currentRoundIndex = 0;
+
+                foreach (List<FightView> list in weightClass.rounds)
+                {
+                    foreach (FightView fightView in list)
+                    {
+                        if (fightView.Equals(this))
+                        {
+                            currentRoundIndex = weightClass.rounds.IndexOf(list);
+                        }
+                    }
+                }
+
+                //check if next rounds are small final and final
+                if (weightClass.rounds.Count - (currentRoundIndex + 1) < 3)
+                {
+                    //code for final fights
+                    if (fighter1 == winner)
+                    {
+                        finalFightsHelper(currentRoundIndex, fighter2);
+                    }
+                    else //fighter2 == winner
+                    {
+                        finalFightsHelper(currentRoundIndex, fighter1);
+                    }
+                }
+                else //when not 'small final' or final
+                {
+                    List<FightView> round = weightClass.rounds[currentRoundIndex + 1];
+
+                    foreach (FightView fightView in round)
+                    {
+                        if (fightView.getFighter1() == null)
+                        {
+                            fightView.setFighter1(fighter);
+                            break;
+                        }
+                        else if (fightView.getFighter2() == null)
+                        {
+                            fightView.setFighter2(fighter);
+                            break;
+                        }
+                        else
+                        {
+                            //nothing happens, goes to next fightView in the list
+                        }
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                throw new GDCException("Error in method FighterToNextRound(Fighter fighter): " + exc.Message);
+            }
+        }
+
+        private void finalFightsHelper(int currentRoundIndex, Fighter loser)
+        {
+            try
+            {
+
+                //set winner to 'final'
+                if (weightClass.rounds[currentRoundIndex + 2][0].getFighter1() == null)
+                {
+                    weightClass.rounds[currentRoundIndex + 2][0].setFighter1(winner);
+                }
+                else
+                {
+                    weightClass.rounds[currentRoundIndex + 2][0].setFighter2(winner);
+                }
+
+                //set loser to 'small final'
+                if (weightClass.rounds[currentRoundIndex + 1][0].getFighter1() == null)
+                {
+                    weightClass.rounds[currentRoundIndex + 1][0].setFighter1(loser);
+                }
+                else
+                {
+                    weightClass.rounds[currentRoundIndex + 1][0].setFighter2(loser);
+                }
+            }
+            catch (Exception exc)
+            {
+                throw new GDCException("Error in method finalFightsHelper(param): " + exc.Message);
+            }
+        }
+
 
         //method to make a string summary of the fight for the fightoverview pane
         public override string ToString()
