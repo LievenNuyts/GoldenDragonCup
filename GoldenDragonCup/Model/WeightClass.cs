@@ -78,24 +78,18 @@ namespace GoldenDragonCup
 
                 if (weightClassFighters.Count() > 2)
                 {
-                    //round2 = new List<FightView>();
-                    //round3 = new List<FightView>();
-
                     createRounds(2);
                 }
                 if (weightClassFighters.Count() > 4)
                 {
-                    //round4 = new List<FightView>();
                     createRounds(1);
                 }
                 if (weightClassFighters.Count() > 8)
                 {
-                    //round5 = new List<FightView>();
                     createRounds(1);
                 }
                 if (weightClassFighters.Count() > 16)
                 {
-                    //round6 = new List<FightView>();
                     createRounds(1);
                 }
 
@@ -203,8 +197,31 @@ namespace GoldenDragonCup
         //method creates fightView and ads it to list provided as parameter
         public void addFightViewToRound(List<FightView> list)
         {
-            FightView fightView = new FightView(this);
-            list.Add(fightView);
+            try
+            {
+                int i = rounds.IndexOf(list) + 1;
+                
+                FightView fightView = new FightView(this);         
+                list.Add(fightView);
+
+                if(i == rounds.Count)
+                {
+                    fightView.setHeader("FINAL");
+                }
+                else if (i == rounds.Count - 1)
+                {
+                    fightView.setHeader("final");
+                }
+                else
+                {
+                    fightView.setHeader("ROUND" + i.ToString());
+                }
+
+            }
+            catch (Exception exc)
+            {
+                throw new GDCException("Error in method addFightViewToRound(List<FightView> list) " + exc.Message);
+            }
         }
 
         //method creates x fightViews per round based on int value parameters
@@ -289,5 +306,6 @@ namespace GoldenDragonCup
 
             return freeFighters;
         }
+     
     }
 }

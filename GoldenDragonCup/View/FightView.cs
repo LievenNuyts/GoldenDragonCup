@@ -73,7 +73,7 @@ namespace GoldenDragonCup.View
                 //dimensions of the group box
                 this.Foreground = Brushes.Gold;
                 this.Width = 200;
-                this.Height = 120;
+                this.Height = 135;
 
                 //initialise label
                 lbl_winner = new Label();
@@ -154,10 +154,6 @@ namespace GoldenDragonCup.View
 
                 //add grid to groupbox
                 this.AddChild(grid);
-
-
-                //add name to the GroupBox
-                //this.Header = "Fight " + fightCounter.ToString();
             }
             catch (Exception exc)
             {
@@ -285,7 +281,41 @@ namespace GoldenDragonCup.View
         //method to make a string summary of the fight for the fightoverview pane
         public override string ToString()
         {
-            return "";
+            try
+            {
+                string f1;
+                string f2;
+            
+                if (fighter1 == null)
+                {
+                    f1 = "   *****   ";
+                }
+                else
+                {
+                    f1 = fighter1.lastName + " " + fighter1.firstName[0];
+                }
+
+                if (fighter2 == null)
+                {
+                    f2 = "   *****   ";
+                }
+                else
+                {
+                    f2 = fighter2.lastName + " " + fighter2.firstName[0];
+                }
+             
+                if (this.Header == null)
+                {
+                    this.Header = "";
+                }
+
+                return weightClass.category + "  [" + this.Header.ToString() + "] :  " +
+                        f1.ToUpper() + "  vs. " + f2.ToUpper();
+            }
+            catch (Exception exc)
+            {
+                throw new GDCException("Error in method override string ToString(): " + exc.Message);
+            }
         }
 
         //setter methodes
@@ -323,6 +353,11 @@ namespace GoldenDragonCup.View
         public Fighter getFighter2()
         {
             return this.fighter2;
+        }
+
+        public void setHeader(string header)
+        {
+            this.Header = header;
         }
     }
 }

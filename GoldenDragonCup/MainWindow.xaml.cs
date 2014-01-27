@@ -49,6 +49,8 @@ namespace GoldenDragonCup
 
                 createTrees();
 
+                fightViewsToListBox();
+
                 //testFightViews();
 
             }
@@ -231,9 +233,9 @@ namespace GoldenDragonCup
 
                     case 7:
                         fightViewPositioner(grid, weightClass.rounds[1][0], 3, 2);
-                        fightViewPositioner(grid, weightClass.rounds[1][1], 3, 6);
-                        fightViewPositioner(grid, weightClass.rounds[2][0], 5, 4);
-                        fightViewPositioner(grid, weightClass.rounds[3][0], 7, 4);
+                        fightViewPositioner(grid, weightClass.rounds[1][1], 3, 4);
+                        fightViewPositioner(grid, weightClass.rounds[2][0], 5, 3);
+                        fightViewPositioner(grid, weightClass.rounds[3][0], 7, 3);
                         break;
 
                     case 8:
@@ -418,6 +420,32 @@ namespace GoldenDragonCup
                 throw new GDCException("Error in method fightViewPerRoundPositioner(parameters): " + exc.Message);
             }
         }
+
+        private void fightViewsToListBox()
+        {
+            try
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    foreach (WeightClass weightClass in tournament.weightClasses)
+                    {
+                        if(i < weightClass.rounds.Count)
+                        {             
+                            foreach (FightView fightView in weightClass.rounds[i])
+                            {                         
+                                lstb_fights.Items.Add(fightView.ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                throw new GDCException("Error in method fightViewsToListBox(): " + exc.Message);
+            }
+        }
+
+
 
         private void readFightersFromFile()
         {
