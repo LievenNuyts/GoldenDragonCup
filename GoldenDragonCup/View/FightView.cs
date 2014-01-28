@@ -14,8 +14,7 @@ using System.Windows.Shapes;
 
 namespace GoldenDragonCup.View
 {
-    // !! ALLE ELEMENTEN NOG PLAATSEN !!
-    
+  
     public class FightView : GroupBox //is a type of GroupBox
     {      
         public WeightClass weightClass;
@@ -179,9 +178,65 @@ namespace GoldenDragonCup.View
 
         private void btn_confirm_Click(object sender, RoutedEventArgs e)
         {
-            if (winner != null)
+            try
             {
-                FighterToNextRound(winner);
+
+                if (btn_confirm.Content.ToString() == "X") // = undo button
+                {
+                    //reactivate buttons
+                    btn_confirm.Content = "OK";
+                    btn_confirm.Foreground = Brushes.Black;
+                    btn_fighter1.IsEnabled = true;
+                    btn_fighter2.IsEnabled = true;
+
+                    //remove the previously transferred fighter from next round
+                    foreach (List<FightView> list in weightClass.rounds)
+                    {
+                        if (list.Contains(this))
+                        {
+                            List<FightView> nextRoundList = weightClass.rounds[weightClass.rounds.IndexOf(list) + 1];
+
+                            foreach (FightView fightView in nextRoundList)
+                            {
+                                if (fightView.fighter1 != null && fightView.fighter1.Equals(winner))
+                                {
+                                    fightView.fighter1 = null;
+                                    fightView.btn_fighter1.Content = "***";
+
+                                    winner = null;
+                                    txtb_winner.Text = "";
+                                }
+
+                                if (fightView.fighter2 != null && fightView.fighter2.Equals(winner))
+                                {
+                                    fightView.fighter2 = null;
+                                    fightView.btn_fighter2.Content = "***";
+
+                                    winner = null;
+                                    txtb_winner.Text = "";
+                                }
+                            }
+                        }
+                    }
+                }
+                else //(btn_confirm.Content.ToString() == "OK")
+                {
+                    if (winner != null)
+                    {
+                        FighterToNextRound(winner);
+
+                        btn_confirm.Content = "X";
+                        btn_confirm.Foreground = Brushes.Red;
+
+                        btn_fighter1.IsEnabled = false;
+                        btn_fighter2.IsEnabled = false;
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                ///throw new GDCException("Error in method btn_confirm_Click(): " + exc.Message);
+                MessageBox.Show("Error in method btn_confirm_Click(): " + exc.Message);
             }
         }
 

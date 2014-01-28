@@ -75,6 +75,7 @@
     <Compile Include="Model\idManager.cs" />
     <Compile Include="Model\Tournament.cs" />
     <Compile Include="Model\WeightClass.cs" />
+    <Compile Include="View\AbstractFightView.cs" />
     <Compile Include="View\FightView.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
