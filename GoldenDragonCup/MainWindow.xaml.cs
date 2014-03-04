@@ -37,6 +37,7 @@ namespace GoldenDragonCup
                 //random = new Random();
 
                 allFighters = new ArrayList();
+                
                 //readFightersFromFile();
 
                 //tournament = new Tournament("Golden Dragon Cup 2014", allFighters);
@@ -49,53 +50,13 @@ namespace GoldenDragonCup
 
                 createTrees();
 
-                fightViewsToListBox();
-
-                //testFightViews();
+                fightViewsToListBox();       
 
             }
             catch (Exception exc)
             {
                 MessageBox.Show(exc.Message);
             }          
-        }
-
-        private void testFightViews()
-        {
-
-            foreach (WeightClass weightClass in tournament.weightClasses)
-            {
-
-                Fighter one = weightClass.weightClassFighters[0];
-                Fighter two = weightClass.weightClassFighters[1];
-
-                FightView fightView = new FightView(one, two, weightClass);
-
-                foreach (TabItem tab in tabControl.Items)
-                {
-                    if(tab.Header.ToString() == weightClass.category)
-                    {               
-                        Grid toAddFightViewsTo = (Grid)tab.Content;
-
-                        toAddFightViewsTo.Children.Add(fightView);
-                        Grid.SetColumn(fightView, 1);
-                        Grid.SetRow(fightView, 1);
-                    }
-                }
-            }
-        }
-
-        private ArrayList createTestArray()
-        {
-            ArrayList testList = new ArrayList();
-            testList.Add("FC M -65");
-            testList.Add("FC M -75");
-            testList.Add("FC M -85");
-            testList.Add("FC M +85");
-            testList.Add("FC V -65");
-            testList.Add("FC M +65");
-
-            return testList;
         }
 
         private ArrayList createTestFighters()
@@ -113,59 +74,77 @@ namespace GoldenDragonCup
 
             Fighter fighter4 = new Fighter("Jaak", "Clymans", "Golden Phoenix", "Brussel, Belgium", "FC M +65");
             fighters.Add(fighter4);
-  
+            
             Fighter fighter5 = new Fighter("Raf", "Evens", "Long Hu Men", "Leuven, Belgium", "FC M +65");
             fighters.Add(fighter5);
 
+            
             Fighter fighter6 = new Fighter("Pieter", "Vermeulen", "Golden Phoenix", "Brussel, Belgium", "FC M +65");
             fighters.Add(fighter6);
 
             Fighter fighter7 = new Fighter("Joris", "Peters", "Long Hu Men", "Leuven, Belgium", "FC M +65");
             fighters.Add(fighter7);
 
-            return fighters;
+
+            for (int i = 1; i < 21; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +55");
+                fighters.Add(fighter);
+            }
+
+            //MessageBox.Show(fighters.Count.ToString());
+
+            return fighters;  
         }
 
         private void createTabsforWeightClasses()
         {
-            foreach (WeightClass weightClass in tournament.weightClasses)
+            try
             {
-                TabItem tab = new TabItem();
-                tab.Header = weightClass.category;
-
-                Grid grid = new Grid();
-                grid.Background = Brushes.Crimson;
-                grid.Height = 1600;
-
-                //add columns to grid              
-                for (int i = 0; i < 6; i++)
+                foreach (WeightClass weightClass in tournament.weightClasses)
                 {
-                    grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(20.0) });
-                    grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(220.0) });
-                }            
-            
-                //add rows to grid
-                grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(20.0) });
+                    TabItem tab = new TabItem();
+                    tab.Header = weightClass.category;
 
-                for (int i = 0; i < weightClass.weightClassFighters.Count(); i++)
-                {
-                    grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(140.0) });
+                    Grid grid = new Grid();
+                    grid.Background = Brushes.Crimson;
+                    grid.Height = 950;
+
+                    //add columns to grid              
+                    for (int i = 0; i < 6; i++)
+                    {
+                        grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(15.0) });
+                        grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(145.0) });
+                    }
+
+                    //add rows to grid
+                    grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(15.0) });
+
+                    for (int i = 0; i < 9; i++)
+                    {
+                        grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(80.0) });
+                    }
+
+                    //create scrollbar
+                    ScrollViewer scrollView = new ScrollViewer();
+
+                    scrollView.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+                    scrollView.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+
+                    //add grid to scrollviewer
+                    scrollView.Content = grid;
+
+                    //add scrollviewer to tab
+                    tab.Content = scrollView;
+
+                    //add tab to tabControl
+                    tabControl.Items.Add(tab);
                 }
-
-                //create scrollbar
-                ScrollViewer scrollView = new ScrollViewer();
-                         
-                scrollView.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-                scrollView.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
-                
-                //add grid to scrollviewer
-                scrollView.Content = grid;  
-        
-                //add scrollviewer to tab
-                tab.Content = scrollView;
-       
-                //add tab to tabControl
-                tabControl.Items.Add(tab);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error in method createTabsforWeightClasses(): " + exc.Message);
+                throw new GDCException("Error in method createTabsforWeightClasses(): " + exc.Message);
             }
         }
 
@@ -183,21 +162,25 @@ namespace GoldenDragonCup
                             ScrollViewer viewer = (ScrollViewer)tab.Content;
                             Grid grid = (Grid)viewer.Content;
 
+                            setRows(grid, weightClass);
+
                             //set first round in column 1
-                            fightViewPerRoundPositioner(grid, weightClass.rounds[0], 1, 1, 2);
+                            //fightViewPerRoundPositioner(grid, weightClass.rounds[0], 1, 1, 2);
 
                             //set other columns
-                            positionFightViews(grid, weightClass);
+                            //positionFightViews(grid, weightClass);
                         }
                     }
                 }
             }
             catch (Exception exc)
-            {      
+            {
+                MessageBox.Show("Error in method createTrees(): " + exc.Message);
                 throw new GDCException("Error in method createTrees(): " + exc.Message);
             }
         }
 
+        /*
         private void positionFightViews(Grid grid, WeightClass weightClass)
         {  
             try
@@ -419,7 +402,174 @@ namespace GoldenDragonCup
             {
                 throw new GDCException("Error in method fightViewPerRoundPositioner(parameters): " + exc.Message);
             }
+        }*/
+
+
+        //NEW METHODS FOR FIGHTVIEW POSITIONING
+
+        //method to set the last column
+        public void setRow6(Grid grid, WeightClass weightClass)
+        {
+            try
+            {
+                List<FightView> roundFINAL = weightClass.rounds[weightClass.rounds.Count - 1];
+                grid.Children.Add(roundFINAL[0]);
+                Grid.SetColumn(roundFINAL[0], 11);
+                Grid.SetRow(roundFINAL[0], 5);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error in method setRow6(parameters): " + exc.Message);
+                throw new GDCException("Error in method setRow6(parameters): " + exc.Message);
+            }
         }
+
+
+        //method to set column 4 and 5
+        public void setRow45(Grid grid, WeightClass weightClass)
+        {
+            try
+            {
+                if (weightClass.rounds.Count >= 3)
+                {
+                    int i = 0;
+
+                    foreach (List<FightView> list in weightClass.rounds)
+                    {
+                        i += list.Count;
+                    }
+
+                    if (i == 3) //it's a round robin
+                    {                  
+                        
+                        List<FightView> robinThree = weightClass.rounds[weightClass.rounds.Count - 1];
+                        grid.Children.Add(robinThree[0]);
+                        Grid.SetColumn(robinThree[0], 11);
+                        Grid.SetRow(robinThree[0], 5);
+
+                        List<FightView> robinTwo = weightClass.rounds[weightClass.rounds.Count - 2];
+                        grid.Children.Add(robinTwo[0]);
+                        Grid.SetColumn(robinTwo[0], 9);
+                        Grid.SetRow(robinTwo[0], 5);
+
+                        List<FightView> robinOne = weightClass.rounds[weightClass.rounds.Count - 3];
+                        grid.Children.Add(robinOne[0]);
+                        Grid.SetColumn(robinOne[0], 7);
+                        Grid.SetRow(robinOne[0], 5);
+                    }
+                    else
+                    {
+                        setRow6(grid, weightClass);
+
+                        List<FightView> roundFinal = weightClass.rounds[weightClass.rounds.Count - 2];
+                        grid.Children.Add(roundFinal[0]);
+                        Grid.SetColumn(roundFinal[0], 9);
+                        Grid.SetRow(roundFinal[0], 5);
+
+                        List<FightView> semiFinal = weightClass.rounds[weightClass.rounds.Count - 3];
+                        grid.Children.Add(semiFinal[0]);
+                        Grid.SetColumn(semiFinal[0], 7);
+                        Grid.SetRow(semiFinal[0], 4);
+
+                        grid.Children.Add(semiFinal[1]);
+                        Grid.SetColumn(semiFinal[1], 7);
+                        Grid.SetRow(semiFinal[1], 6);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error in method setRow456(parameters): " + exc.Message);
+                throw new GDCException("Error in method setRow456(parameters): " + exc.Message);
+            }
+        }
+
+        //method to set the third row
+        public void setRow3(Grid grid, WeightClass weightClass)
+        {
+            try
+            {
+                setRow45(grid, weightClass);
+
+                if (weightClass.rounds.Count >= 4)
+                {
+                    List<FightView> quatreFinal = weightClass.rounds[weightClass.rounds.Count - 4];
+
+                    for (int i = 0, y = 2; i < quatreFinal.Count; i++, y += 2)
+                    {
+                        grid.Children.Add(quatreFinal[i]);
+                        Grid.SetColumn(quatreFinal[i], 5);
+                        Grid.SetRow(quatreFinal[i], y);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error in method setRow3(parameters): " + exc.Message);
+                throw new GDCException("Error in method setRow3(parameters): " + exc.Message);
+            }
+        }
+
+        //method to set the second row
+        public void setRow2(Grid grid, WeightClass weightClass)
+        {
+            try
+            {
+                setRow3(grid, weightClass);
+
+                if (weightClass.rounds.Count >= 5)
+                {
+                    List<FightView> eighthFinal = weightClass.rounds[weightClass.rounds.Count - 5];
+
+                    for (int i = 0, y = 1; i < eighthFinal.Count; i++, y++)
+                    {
+                        if (y == 5)
+                        {
+                            y++;
+                        }
+                        
+                        grid.Children.Add(eighthFinal[i]);
+                        Grid.SetColumn(eighthFinal[i], 3);
+                        Grid.SetRow(eighthFinal[i], y);
+                    }
+                }
+            }
+            catch(Exception exc)
+            {
+                MessageBox.Show("Error in method setRow2(parameters): " + exc.Message);
+                throw new GDCException("Error in method setRow2(parameters): " + exc.Message);
+            }
+        }
+
+        //method to set the first row
+        public void setRows(Grid grid, WeightClass weightClass)
+        {
+            try
+            {
+                setRow2(grid, weightClass);
+
+                if (weightClass.rounds.Count == 6)
+                {
+                    List<FightView> selectionRound = weightClass.rounds[weightClass.rounds.Count - 6];
+
+                    for (int i = 0, y = 2; i < selectionRound.Count; i++, y += 2)
+                    {
+                        grid.Children.Add(selectionRound[i]);
+                        Grid.SetColumn(selectionRound[i], 1);
+                        Grid.SetRow(selectionRound[i], y);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error in method setRow1(parameters): " + exc.Message);
+                throw new GDCException("Error in method setRow1(parameters): " + exc.Message);
+            }
+        }
+
+
+
+        //METHOD TO ADD FIGHTS TO LISTBOX (TO SHOW PROGRESS)
 
         private void fightViewsToListBox()
         {
@@ -441,11 +591,13 @@ namespace GoldenDragonCup
             }
             catch (Exception exc)
             {
+                MessageBox.Show("Error in method fightViewsToListBox(): " + exc.Message);
                 throw new GDCException("Error in method fightViewsToListBox(): " + exc.Message);
             }
         }
 
 
+        //METHOD TO IMPORT EXCEL FIGHTERS
 
         private void readFightersFromFile()
         {
@@ -479,6 +631,7 @@ namespace GoldenDragonCup
             }
             catch (Exception exc)
             {
+                MessageBox.Show("Error in method readFightersFromFile(): " + exc.Message);
                 throw new GDCException("Error in method readFightersFromFile(): " + exc.Message);
             }
         }

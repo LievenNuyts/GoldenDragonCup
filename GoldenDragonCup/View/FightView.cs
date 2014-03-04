@@ -28,8 +28,8 @@ namespace GoldenDragonCup.View
         public bool inProgress; //true if this fight is currently in progress
          
         public Button btn_fighter1, btn_fighter2, btn_confirm;
-        public Label lbl_winner;
-        public TextBox txtb_winner;
+        //public Label lbl_winner;
+        //public TextBox txtb_winner;
         public Grid grid;
    
         //constructor based on weightclass
@@ -66,41 +66,42 @@ namespace GoldenDragonCup.View
         //method to initialise components and define layout
         public void initialise()
         {
-
             try
             {
                 //dimensions of the group box
                 this.Foreground = Brushes.Gold;
-                this.Width = 200;
-                this.Height = 135;
+                this.Width = 130;
+                this.Height = 80;
 
+                /*
                 //initialise label
                 lbl_winner = new Label();
-                lbl_winner.Content = "          Winner:";
+                lbl_winner.FontSize = 10;
+                lbl_winner.Content = "        Winner:";
                 lbl_winner.FontWeight = FontWeights.Bold;
-                lbl_winner.Width = 90;
+                lbl_winner.Width = 70;
                 lbl_winner.Height = 25;
 
                 //initialise textbox
                 txtb_winner = new TextBox();
-                txtb_winner.Width = 90;
-                txtb_winner.Height = 30;
-                txtb_winner.FontWeight = FontWeights.Bold;
+                txtb_winner.Width = 70;
+                txtb_winner.Height = 28;
+                txtb_winner.FontWeight = FontWeights.Bold;*/
 
                 //initialise buttons
                 btn_fighter1 = new Button();
                 btn_fighter1.Width = 90;
-                btn_fighter1.Height = 35;
+                btn_fighter1.Height = 25;
+                btn_fighter1.FontSize = 12;
                 btn_fighter1.Foreground = Brushes.Red;
-                btn_fighter1.FontWeight = FontWeights.Bold;
-                //btn_fighter1.Content = fighter1.lastName + " " + fighter1.firstName[0];     
+                btn_fighter1.FontWeight = FontWeights.Bold;             
                 btn_fighter1.Content = "  ***  ";
 
                 btn_fighter2 = new Button();
                 btn_fighter2.Width = 90;
-                btn_fighter2.Height = 35;
-                btn_fighter2.FontWeight = FontWeights.Bold;
-                //btn_fighter2.Content = fighter2.lastName + " " + fighter2.firstName[0];
+                btn_fighter2.Height = 25;
+                btn_fighter2.FontSize = 12;
+                btn_fighter2.FontWeight = FontWeights.Bold;               
                 btn_fighter2.Content = "  ***  ";
 
                 btn_confirm = new Button();
@@ -117,39 +118,40 @@ namespace GoldenDragonCup.View
 
                 //initialise grid
                 grid = new Grid();
-                grid.Width = 190;
-                grid.Height = 115;
+                grid.Width = 115;
+                grid.Height = 65;
 
-                grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(95.0) });
-                grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(95.0) });
+                grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(90.0) });
+                grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(25.0) });
 
 
-                grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(5.0) });
-                grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(35.0) });
-                grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(35.0) });
-                grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(35.0) });
-                grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(5.0) });
+                //grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(4.0) });
+                //grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(28.0) });
+                grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(30.0) });
+                //grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(5.0) });
+                grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(30.0) });
 
                 //add buttons and labels to grid
                 grid.Children.Add(btn_fighter1);
                 Grid.SetColumn(btn_fighter1, 0);
-                Grid.SetRow(btn_fighter1, 1);
+                Grid.SetRow(btn_fighter1, 0);
 
                 grid.Children.Add(btn_fighter2);
                 Grid.SetColumn(btn_fighter2, 0);
-                Grid.SetRow(btn_fighter2, 3);
+                Grid.SetRow(btn_fighter2, 1);
 
+                /*
                 grid.Children.Add(lbl_winner);
                 Grid.SetColumn(lbl_winner, 0);
                 Grid.SetRow(lbl_winner, 2);
 
                 grid.Children.Add(txtb_winner);
                 Grid.SetColumn(txtb_winner, 1);
-                Grid.SetRow(txtb_winner, 2);
+                Grid.SetRow(txtb_winner, 2);*/
 
                 grid.Children.Add(btn_confirm);
                 Grid.SetColumn(btn_confirm, 1);
-                Grid.SetRow(btn_confirm, 3);
+                Grid.SetRow(btn_confirm, 1);
 
                 //add grid to groupbox
                 this.AddChild(grid);
@@ -165,15 +167,15 @@ namespace GoldenDragonCup.View
         private void btn_fighter1_Click(object sender, RoutedEventArgs e)
         {
             winner = fighter1;
-            txtb_winner.Text = btn_fighter1.Content.ToString();
-            txtb_winner.Foreground = btn_fighter1.Foreground;
+            //txtb_winner.Text = btn_fighter1.Content.ToString();
+            //txtb_winner.Foreground = btn_fighter1.Foreground;
         }
 
         private void btn_fighter2_Click(object sender, RoutedEventArgs e)
         {
             winner = fighter2;
-            txtb_winner.Text = btn_fighter2.Content.ToString();
-            txtb_winner.Foreground = btn_fighter2.Foreground;
+            //txtb_winner.Text = btn_fighter2.Content.ToString();
+            //txtb_winner.Foreground = btn_fighter2.Foreground;
         }
 
         private void btn_confirm_Click(object sender, RoutedEventArgs e)
@@ -204,7 +206,7 @@ namespace GoldenDragonCup.View
                                     fightView.btn_fighter1.Content = "***";
 
                                     winner = null;
-                                    txtb_winner.Text = "";
+                                    //txtb_winner.Text = "";
                                 }
 
                                 if (fightView.fighter2 != null && fightView.fighter2.Equals(winner))
@@ -213,7 +215,7 @@ namespace GoldenDragonCup.View
                                     fightView.btn_fighter2.Content = "***";
 
                                     winner = null;
-                                    txtb_winner.Text = "";
+                                    //txtb_winner.Text = "";
                                 }
                             }
                         }

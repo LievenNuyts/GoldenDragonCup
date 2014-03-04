@@ -32,7 +32,7 @@ namespace GoldenDragonCup
                 foreach (WeightClass weightClass in weightClasses)
                 {
                     weightClass.createFightViews();
-                    weightClass.testMethodToAssignFightersToFightViews();
+                    weightClass.assignFightersToFightViews();
                 }
 
             }
@@ -49,7 +49,6 @@ namespace GoldenDragonCup
             {
                WeightClass weightClass = new WeightClass(code, this);
                this.weightClasses.Add(weightClass);
-    
             }
         }
 

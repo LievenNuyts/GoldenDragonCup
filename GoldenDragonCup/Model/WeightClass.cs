@@ -10,21 +10,12 @@ namespace GoldenDragonCup
 {
     public class WeightClass
     {
-        static Random random;
+        public static Random random;
         
-        public int id;
         public string category;
 
         public List<Fighter> weightClassFighters; //list of all fighters in this weightclass
-        public List<List<FightView>> rounds;
-
-        /*
-        public List<FightView> round1; //list of fights (=matched fighters). Will be expanded after each finished round
-        public List<FightView> round2;
-        public List<FightView> round3;
-        public List<FightView> round4;
-        public List<FightView> round5;
-        public List<FightView> round6;*/
+        public List<List<FightView>> rounds; //list of lists of fightViews (the rounds)
 
         public Tournament tournament;
 
@@ -36,8 +27,6 @@ namespace GoldenDragonCup
                 
                 this.category = category;
                 this.tournament = tournament;
-                this.id = idManager.getNewWeightclassId();
-
                 this.weightClassFighters = new List<Fighter>();
                 this.rounds = new List<List<FightView>>();
             }
@@ -67,31 +56,23 @@ namespace GoldenDragonCup
             }
         }
 
+        //methode that generates Fightview lists and adds fightviews to each list depending on number of fighters
         public void createFightViews()
         {
             try
             {
-                //initialise fightview list per round that will be used based on count of fighters in weightclass
-
-                //round1 = new List<FightView>();
+                //initialise fightview list per round that will be used based on count of fighters in weightclass     
+                
                 createRounds(1);
-
                 if (weightClassFighters.Count() > 2)
-                {
-                    createRounds(2);
-                }
+                    {createRounds(2);}
                 if (weightClassFighters.Count() > 4)
-                {
-                    createRounds(1);
-                }
+                    {createRounds(1);}
                 if (weightClassFighters.Count() > 8)
-                {
-                    createRounds(1);
-                }
+                    {createRounds(1);}
                 if (weightClassFighters.Count() > 16)
-                {
-                    createRounds(1);
-                }
+                    {createRounds(1);}
+                
 
                 //create fightviews and assign to proper round lists based on amount of fighters in weightclass
                 switch (weightClassFighters.Count())
@@ -99,83 +80,63 @@ namespace GoldenDragonCup
                     case 2:
                         fightViewCreator(1, 0, 0, 0, 0, 0);
                         break;
-
-                    case 3:
+                    case 3: //round robin
                         fightViewCreator(1, 1, 1, 0, 0, 0);
                         break;
-
                     case 4:
                         fightViewCreator(2, 1, 1, 0, 0, 0);
                         break;
-
                     case 5:
-                        fightViewCreator(2, 1, 1, 1, 0, 0);
+                        fightViewCreator(1, 2, 1, 1, 0, 0);
                         break;
-
                     case 6:
-                        fightViewCreator(3, 1, 1, 1, 0, 0);
+                        fightViewCreator(2, 2, 1, 1, 0, 0);
                         break;
-
                     case 7:
                         fightViewCreator(3, 2, 1, 1, 0, 0);
                         break;
-
                     case 8:
                         fightViewCreator(4, 2, 1, 1, 0, 0);
                         break;
-
                     case 9:
-                        fightViewCreator(4, 2, 1, 1, 1, 0);
+                        fightViewCreator(1, 4, 2, 1, 1, 0);
                         break;
-
                     case 10:
-                        fightViewCreator(5, 2, 1, 1, 1, 0);
+                        fightViewCreator(2, 4, 2, 1, 1, 0);
                         break;
-
                     case 11:
-                        fightViewCreator(5, 3, 1, 1, 1, 0);
+                        fightViewCreator(3, 4, 2, 1, 1, 0);
                         break;
-
                     case 12:
-                        fightViewCreator(6, 3, 1, 1, 1, 0);
+                        fightViewCreator(4, 4, 2, 1, 1, 0);
                         break;
-
                     case 13:
-                        fightViewCreator(6, 3, 2, 1, 1, 0);
+                        fightViewCreator(5, 4, 2, 1, 1, 0);
                         break;
-
                     case 14:
-                        fightViewCreator(7, 3, 2, 1, 1, 0);
+                        fightViewCreator(6, 4, 2, 1, 1, 0);
                         break;
-
                     case 15:
                         fightViewCreator(7, 4, 2, 1, 1, 0);
                         break;
-
                     case 16:
                         fightViewCreator(8, 4, 2, 1, 1, 0);
                         break;
-
                     case 17:
-                        fightViewCreator(8, 4, 2, 1, 1, 1);
+                        fightViewCreator(1, 8, 4, 2, 1, 1);
                         break;
-
                     case 18:
-                        fightViewCreator(9, 4, 2, 1, 1, 1);
+                        fightViewCreator(2, 8, 4, 2, 1, 1);
                         break;
-
                     case 19:
-                        fightViewCreator(9, 5, 2, 1, 1, 1);
+                        fightViewCreator(3, 8, 4, 2, 1, 1);
                         break;
-
                     case 20:
-                        fightViewCreator(10, 5, 2, 1, 1, 1);
+                        fightViewCreator(4, 8, 4, 2, 1, 1);
                         break;
-
                     default:
                         throw new GDCException("Invalid number of fighters in weightclass " + this.category + ": " +
-                                                    weightClassFighters.Count().ToString());
-                        break;
+                                                    weightClassFighters.Count().ToString());                     
                 }
             }
             catch (Exception exc)
@@ -194,7 +155,8 @@ namespace GoldenDragonCup
             }
         }
 
-        //method creates fightView and ads it to list provided as parameter
+        //method creates fightView and adds it to list provided as parameter. 
+        //method also sets the title of round number, final, ...
         public void addFightViewToRound(List<FightView> list)
         {
             try
@@ -254,58 +216,118 @@ namespace GoldenDragonCup
         }
 
 
-        public void testMethodToAssignFightersToFightViews()
+        public void assignFightersToFightViews()
         {
             try
             {
-                foreach (FightView fightView in (List<FightView>)rounds[0])
+                if (roundRobinChecker()) //round robin
                 {
-                    if (fightView.getFighter1() == null)
+                    FightView fvRound1 = rounds[0][0];
+                    fvRound1.setFighter1(weightClassFighters[0]);
+                    fvRound1.setFighter2(weightClassFighters[1]);
+
+                    FightView fvRound2 = rounds[1][0];
+                    fvRound2.setFighter1(weightClassFighters[0]);
+                    fvRound2.setFighter2(weightClassFighters[2]);
+
+                    FightView fvRound3 = rounds[2][0];
+                    fvRound3.setFighter1(weightClassFighters[1]);
+                    fvRound3.setFighter2(weightClassFighters[2]);
+                }
+                else //not round robin
+                {
+                    //assign fighters to the first round
+                    foreach (FightView fightView in (List<FightView>)rounds[0])
                     {
-                        fightView.setFighter1(selectFreeFighter());
+                        if (fightView.getFighter1() == null)
+                        {
+                            fightView.setFighter1(selectFreeFighter());
+                        }
+
+                        if (fightView.getFighter2() == null)
+                        {
+                            fightView.setFighter2(selectFreeFighter());
+                        }
                     }
 
-                    if (fightView.getFighter2() == null)
+                    List<Fighter> freeFighters = createFreeFighterList();
+
+                    //assign fighters to second round if needed
+                    if (freeFighters.Count > 0)
                     {
-                        fightView.setFighter2(selectFreeFighter());
+                        foreach (FightView fightView in (List<FightView>)rounds[1])
+                        {
+                            freeFighters = createFreeFighterList();
+
+                            if (freeFighters.Count >= 1 && fightView.getFighter1() == null)
+                            {
+                                fightView.setFighter1(selectFreeFighter());
+                            }
+
+                            if (freeFighters.Count > 1 && fightView.getFighter2() == null)
+                            {
+                                fightView.setFighter2(selectFreeFighter());
+                            }
+                        }
                     }
                 }
-
-                List<Fighter> freeFighters = createFreeFighterList();
-
-                if (freeFighters.Count == 1)
-                {
-                    List<FightView> list = (List<FightView>)rounds[1];
-                    FightView fightView = list[0];
-                    fightView.setFighter1(freeFighters[0]);
-                }
-
             }
             catch (Exception exc)
             {
                 throw new GDCException("Error in method testMethodToAssignFightersToFightViews() " + exc.Message);
             }
-
         }
 
         //method that returns a free random fighter from not selected fighters in the weightClass
         private Fighter selectFreeFighter()
         {
-            List<Fighter> freeFighters = createFreeFighterList();
-            Fighter fighter = freeFighters[random.Next(freeFighters.Count)];
-            fighter.isSelected = true;
-            return fighter;
+            try
+            {
+                List<Fighter> freeFighters = createFreeFighterList();
+                Fighter fighter = freeFighters[random.Next(freeFighters.Count)];
+                fighter.isSelected = true;
+                return fighter;
+            }
+            catch (Exception exc)
+            {
+                throw new GDCException("Error in method selectFreeFighter(): " + exc.Message);
+            }
         }
 
         //method that returns a list of unselected fighters of the weightclass
         private List<Fighter> createFreeFighterList()
         {
-            List<Fighter> freeFighters = (from fighterX in weightClassFighters
-                                          where fighterX.isActive == true && fighterX.isSelected == false
-                                          select fighterX).ToList<Fighter>();
+            try
+            {
+                List<Fighter> freeFighters = (from fighterX in weightClassFighters
+                                              where fighterX.isActive == true && fighterX.isSelected == false
+                                              select fighterX).ToList<Fighter>();
 
-            return freeFighters;
+                return freeFighters;
+            }
+            catch (Exception exc)
+            {
+                throw new GDCException("Error in method createFreeFighterList(): " + exc.Message);
+            }
         }
-     
+
+        public bool roundRobinChecker()
+        {
+            int i = 0;
+            
+            foreach(List<FightView> list in rounds)
+            {
+                i += list.Count;
+            }
+
+            if (rounds.Count == 3 && i == 3)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
