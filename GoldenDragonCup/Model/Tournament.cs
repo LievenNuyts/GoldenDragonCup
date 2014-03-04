@@ -35,13 +35,45 @@ namespace GoldenDragonCup
                     weightClass.assignFightersToFightViews();
                 }
 
+                //insert tests to check if no weightclass has less than two or more than 20 fighters
+                //or no fightViews created
+                validateWeightClasses();
+                validateFightViews();
             }
             catch (Exception exc)
             {
                 throw new Exception(exc.Message);
             }
         }
-        
+
+        //method to check if a weightclass has less than 2 or more than 20 fighters
+        private void validateWeightClasses()
+        {
+            foreach (WeightClass weightClass in weightClasses)
+            {
+                if (weightClass.weightClassFighters.Count < 2)
+                {
+                    throw new GDCException("WeightClass " + weightClass.category + " only contains " + weightClass.weightClassFighters.Count.ToString() + " fighters. Check the input Excel file.");
+                }
+                if (weightClass.weightClassFighters.Count > 20)
+                {
+                    throw new GDCException("WeightClass " + weightClass.category + " contains " + weightClass.weightClassFighters.Count.ToString() + " fighters (max = 20). Check the input Excel file.");
+                }
+            }
+        }
+
+        //method to check if a weightClass doesn't have any fightviews created
+        private void validateFightViews()
+        {
+            foreach (WeightClass weightClass in weightClasses)
+            {
+                if (weightClass.rounds == null || weightClass.rounds[0].Count == 0)
+                {
+                    throw new GDCException("WeightClass " + weightClass.category + " doesn't have any fights. Check the input Excel file.");
+                }         
+            }
+        }
+
         //method to create a new weightclass based on parameters and add to the list of weightclasses
         private void addWeightClasses()
         {

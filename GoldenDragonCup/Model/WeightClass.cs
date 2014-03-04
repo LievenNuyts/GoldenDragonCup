@@ -166,17 +166,36 @@ namespace GoldenDragonCup
                 FightView fightView = new FightView(this);         
                 list.Add(fightView);
 
-                if(i == rounds.Count)
+                //check if the round only has three fighters and thus is a round robin
+                if (weightClassFighters.Count == 3)
                 {
-                    fightView.setHeader("FINAL");
+                    if (i == rounds.Count)
+                    {
+                        fightView.setHeader("ROBIN3");
+                    }
+                    else if (i == rounds.Count - 1)
+                    {
+                        fightView.setHeader("ROBIN2");
+                    }
+                    else
+                    {
+                        fightView.setHeader("ROBIN1");
+                    }
                 }
-                else if (i == rounds.Count - 1)
+                else //if it is not round robin
                 {
-                    fightView.setHeader("final");
-                }
-                else
-                {
-                    fightView.setHeader("ROUND" + i.ToString());
+                    if (i == rounds.Count)
+                    {
+                        fightView.setHeader("FINAL");
+                    }
+                    else if (i == rounds.Count - 1)
+                    {
+                        fightView.setHeader("final");
+                    }
+                    else
+                    {
+                        fightView.setHeader("ROUND" + i.ToString());
+                    }
                 }
 
             }

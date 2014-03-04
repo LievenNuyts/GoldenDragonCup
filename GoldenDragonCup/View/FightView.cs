@@ -165,15 +165,27 @@ namespace GoldenDragonCup.View
         
         //events for buttons
         private void btn_fighter1_Click(object sender, RoutedEventArgs e)
-        {
-            winner = fighter1;
+        {       
+            if (btn_confirm.Content.ToString() != "X")
+            {
+                winner = fighter1;
+                btn_fighter1.Background = Brushes.Gold;
+                btn_fighter2.ClearValue(Button.BackgroundProperty);
+            }
+
             //txtb_winner.Text = btn_fighter1.Content.ToString();
             //txtb_winner.Foreground = btn_fighter1.Foreground;
         }
 
         private void btn_fighter2_Click(object sender, RoutedEventArgs e)
         {
-            winner = fighter2;
+            if (btn_confirm.Content.ToString() != "X")
+            {
+                winner = fighter2;
+                btn_fighter2.Background = Brushes.Gold;
+                btn_fighter1.ClearValue(Button.BackgroundProperty);
+            }
+            
             //txtb_winner.Text = btn_fighter2.Content.ToString();
             //txtb_winner.Foreground = btn_fighter2.Foreground;
         }
@@ -188,34 +200,39 @@ namespace GoldenDragonCup.View
                     //reactivate buttons
                     btn_confirm.Content = "OK";
                     btn_confirm.Foreground = Brushes.Black;
-                    btn_fighter1.IsEnabled = true;
-                    btn_fighter2.IsEnabled = true;
+                    btn_fighter1.ClearValue(Button.BackgroundProperty);
+                    btn_fighter2.ClearValue(Button.BackgroundProperty);
+                    winner = null;
 
-                    //remove the previously transferred fighter from next round
-                    foreach (List<FightView> list in weightClass.rounds)
+                    //fighter hasn't been transferred to next round if in finals or in a round robin
+                    if (Header.ToString().ToUpper() != "FINAL" && Header.ToString().Substring(0, 5) != "ROBIN")
                     {
-                        if (list.Contains(this))
+                        //remove the fighter from the next round
+                        foreach (List<FightView> list in weightClass.rounds)
                         {
-                            List<FightView> nextRoundList = weightClass.rounds[weightClass.rounds.IndexOf(list) + 1];
-
-                            foreach (FightView fightView in nextRoundList)
+                            if (list.Contains(this))
                             {
-                                if (fightView.fighter1 != null && fightView.fighter1.Equals(winner))
+                                List<FightView> nextRoundList = weightClass.rounds[weightClass.rounds.IndexOf(list) + 1];
+
+                                foreach (FightView fightView in nextRoundList)
                                 {
-                                    fightView.fighter1 = null;
-                                    fightView.btn_fighter1.Content = "***";
+                                    if (fightView.fighter1 != null && fightView.fighter1.Equals(winner))
+                                    {
+                                        fightView.fighter1 = null;
+                                        fightView.btn_fighter1.Content = "***";
 
-                                    winner = null;
-                                    //txtb_winner.Text = "";
-                                }
+                                        winner = null;
+                                        //txtb_winner.Text = "";
+                                    }
 
-                                if (fightView.fighter2 != null && fightView.fighter2.Equals(winner))
-                                {
-                                    fightView.fighter2 = null;
-                                    fightView.btn_fighter2.Content = "***";
+                                    if (fightView.fighter2 != null && fightView.fighter2.Equals(winner))
+                                    {
+                                        fightView.fighter2 = null;
+                                        fightView.btn_fighter2.Content = "***";
 
-                                    winner = null;
-                                    //txtb_winner.Text = "";
+                                        winner = null;
+                                        //txtb_winner.Text = "";
+                                    }
                                 }
                             }
                         }
@@ -225,13 +242,18 @@ namespace GoldenDragonCup.View
                 {
                     if (winner != null)
                     {
-                        FighterToNextRound(winner);
+                        //fighter doesn't go to a next round if he's already in the finals or ina round robin
+                        if (Header.ToString().ToUpper() != "FINAL" && Header.ToString().Substring(0, 5) != "ROBIN")
+                        {
+                            FighterToNextRound(winner);
+                        }
 
                         btn_confirm.Content = "X";
                         btn_confirm.Foreground = Brushes.Red;
-
-                        btn_fighter1.IsEnabled = false;
-                        btn_fighter2.IsEnabled = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show("First select a winner");
                     }
                 }
             }

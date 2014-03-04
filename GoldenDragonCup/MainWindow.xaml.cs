@@ -17,6 +17,7 @@ using System.Data;
 using System.Data.OleDb;
 using GoldenDragonCup.View;
 
+
 namespace GoldenDragonCup
 {
     /// <summary>
@@ -27,42 +28,25 @@ namespace GoldenDragonCup
         public Tournament tournament;
         public ArrayList allFighters;
         //static Random random;
-        
+
         public MainWindow()
         {
             try
             {
                 InitializeComponent();
-
-                //random = new Random();
-
                 allFighters = new ArrayList();
-                
-                //readFightersFromFile();
-
-                //tournament = new Tournament("Golden Dragon Cup 2014", allFighters);
-                //createTabsforWeightClasses(tournament.weightClassCodes);
-                //createTabsforWeightClasses(createTestArray());
-
-                tournament = new Tournament("Golden Dragon Cup 2014", createTestFighters());
-
-                createTabsforWeightClasses();
-
-                createTrees();
-
-                fightViewsToListBox();       
-
             }
             catch (Exception exc)
             {
                 MessageBox.Show(exc.Message);
-            }          
+            }
         }
 
         private ArrayList createTestFighters()
         {
+            /*
             ArrayList fighters = new ArrayList();
-
+            
             Fighter fighter1 = new Fighter("Jan", "Jansens", "Long Hu Men", "Leuven, Belgium", "FC M +65");
             fighters.Add(fighter1);
 
@@ -74,11 +58,11 @@ namespace GoldenDragonCup
 
             Fighter fighter4 = new Fighter("Jaak", "Clymans", "Golden Phoenix", "Brussel, Belgium", "FC M +65");
             fighters.Add(fighter4);
-            
+
             Fighter fighter5 = new Fighter("Raf", "Evens", "Long Hu Men", "Leuven, Belgium", "FC M +65");
             fighters.Add(fighter5);
 
-            
+
             Fighter fighter6 = new Fighter("Pieter", "Vermeulen", "Golden Phoenix", "Brussel, Belgium", "FC M +65");
             fighters.Add(fighter6);
 
@@ -90,12 +74,146 @@ namespace GoldenDragonCup
             {
                 Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +55");
                 fighters.Add(fighter);
+            }*/
+
+
+            return createFightersUpTo10();
+            //return createFightersUpTo20();
+     
+        }
+
+        //Test method
+        public ArrayList createFightersUpTo10()
+        {
+            ArrayList fighters = new ArrayList();
+            
+            //create fighters 2 - 10
+            for (int i = 1; i < 3; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +55");
+                fighters.Add(fighter);
             }
 
-            //MessageBox.Show(fighters.Count.ToString());
+            for (int i = 1; i < 4; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +60");
+                fighters.Add(fighter);
+            }
 
-            return fighters;  
+            for (int i = 1; i < 5; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +65");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 6; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +70");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 7; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +75");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 8; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +80");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 9; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +85");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 10; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +90");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 11; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +95");
+                fighters.Add(fighter);
+            }
+
+            return fighters;
         }
+
+        //Test method
+        public ArrayList createFightersUpTo20()
+        {
+            ArrayList fighters = new ArrayList();
+
+            //create fighters 11-20
+            for (int i = 1; i < 12; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +55");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 13; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +60");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 14; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +65");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 15; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +70");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 16; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +75");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 17; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +80");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 18; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +85");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 19; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +90");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 20; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +95");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 21; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +100");
+                fighters.Add(fighter);
+            }
+
+            return fighters;
+        }
+
 
         private void createTabsforWeightClasses()
         {
@@ -148,7 +266,6 @@ namespace GoldenDragonCup
             }
         }
 
-
         private void createTrees()
         {
             try
@@ -180,232 +297,8 @@ namespace GoldenDragonCup
             }
         }
 
-        /*
-        private void positionFightViews(Grid grid, WeightClass weightClass)
-        {  
-            try
-            {
-
-                switch (weightClass.weightClassFighters.Count)
-                {
-                    case 2:
-                        //nothing extra needed
-                        break;
-
-                    case 3:     
-                        fightViewPositioner(grid, weightClass.rounds[1][0], 3, 1);
-                        fightViewPositioner(grid, weightClass.rounds[2][0], 5, 1);
-                        break;
-
-                    case 4:
-                        fightViewPositioner(grid, weightClass.rounds[1][0], 3, 2);
-                        fightViewPositioner(grid, weightClass.rounds[2][0], 5, 2);
-                        break;
-
-                    case 5:
-                        fightViewPositioner(grid, weightClass.rounds[1][0], 3, 3);
-                        fightViewPositioner(grid, weightClass.rounds[2][0], 5, 3);
-                        fightViewPositioner(grid, weightClass.rounds[3][0], 7, 3);
-                        break;
-
-                    case 6:
-                        fightViewPositioner(grid, weightClass.rounds[1][0], 3, 3);
-                        fightViewPositioner(grid, weightClass.rounds[2][0], 5, 3);
-                        fightViewPositioner(grid, weightClass.rounds[3][0], 7, 3);
-                        break;
-
-                    case 7:
-                        fightViewPositioner(grid, weightClass.rounds[1][0], 3, 2);
-                        fightViewPositioner(grid, weightClass.rounds[1][1], 3, 4);
-                        fightViewPositioner(grid, weightClass.rounds[2][0], 5, 3);
-                        fightViewPositioner(grid, weightClass.rounds[3][0], 7, 3);
-                        break;
-
-                    case 8:
-                        fightViewPositioner(grid, weightClass.rounds[1][0], 3, 2);
-                        fightViewPositioner(grid, weightClass.rounds[1][1], 3, 6);
-                        fightViewPositioner(grid, weightClass.rounds[2][0], 5, 4);
-                        fightViewPositioner(grid, weightClass.rounds[3][0], 7, 4);
-                        break;
-
-                    case 9:
-                        fightViewPositioner(grid, weightClass.rounds[1][0], 3, 2);
-                        fightViewPositioner(grid, weightClass.rounds[1][1], 3, 8);
-                        fightViewPositioner(grid, weightClass.rounds[2][0], 5, 5);
-                        fightViewPositioner(grid, weightClass.rounds[3][0], 7, 5);
-                        fightViewPositioner(grid, weightClass.rounds[4][0], 9, 5);
-                        break;
-
-                    case 10:
-                        fightViewPositioner(grid, weightClass.rounds[1][0], 3, 2);
-                        fightViewPositioner(grid, weightClass.rounds[1][1], 3, 8);
-                        fightViewPositioner(grid, weightClass.rounds[2][0], 5, 5);
-                        fightViewPositioner(grid, weightClass.rounds[3][0], 7, 5);
-                        fightViewPositioner(grid, weightClass.rounds[4][0], 9, 5);
-                        break;
-
-                    case 11:
-                        fightViewPositioner(grid, weightClass.rounds[1][0], 3, 2);
-                        fightViewPositioner(grid, weightClass.rounds[1][1], 3, 6);
-                        fightViewPositioner(grid, weightClass.rounds[1][2], 3, 10);
-                        fightViewPositioner(grid, weightClass.rounds[2][0], 5, 6);
-                        fightViewPositioner(grid, weightClass.rounds[3][0], 7, 6);
-                        fightViewPositioner(grid, weightClass.rounds[4][0], 9, 6);
-                        break;
-
-                    case 12:
-                        fightViewPositioner(grid, weightClass.rounds[1][0], 3, 2);
-                        fightViewPositioner(grid, weightClass.rounds[1][1], 3, 6);
-                        fightViewPositioner(grid, weightClass.rounds[1][2], 3, 10);
-                        fightViewPositioner(grid, weightClass.rounds[2][0], 5, 6);
-                        fightViewPositioner(grid, weightClass.rounds[3][0], 7, 6);
-                        fightViewPositioner(grid, weightClass.rounds[4][0], 9, 6);
-                        break;
-
-                    case 13:
-                        fightViewPositioner(grid, weightClass.rounds[1][0], 3, 2);
-                        fightViewPositioner(grid, weightClass.rounds[1][1], 3, 6);
-                        fightViewPositioner(grid, weightClass.rounds[1][2], 3, 10);
-                        fightViewPositioner(grid, weightClass.rounds[2][0], 5, 4);
-                        fightViewPositioner(grid, weightClass.rounds[2][1], 5, 12);
-                        fightViewPositioner(grid, weightClass.rounds[3][0], 7, 8);
-                        fightViewPositioner(grid, weightClass.rounds[4][0], 9, 8);
-                        break;
-
-                    case 14:
-                        fightViewPositioner(grid, weightClass.rounds[1][0], 3, 2);
-                        fightViewPositioner(grid, weightClass.rounds[1][1], 3, 6);
-                        fightViewPositioner(grid, weightClass.rounds[1][2], 3, 10);
-                        fightViewPositioner(grid, weightClass.rounds[2][0], 5, 4);
-                        fightViewPositioner(grid, weightClass.rounds[2][1], 5, 12);
-                        fightViewPositioner(grid, weightClass.rounds[3][0], 7, 8);
-                        fightViewPositioner(grid, weightClass.rounds[4][0], 9, 8);
-                        break;
-
-                    case 15:
-                        fightViewPositioner(grid, weightClass.rounds[1][0], 3, 2);
-                        fightViewPositioner(grid, weightClass.rounds[1][1], 3, 6);
-                        fightViewPositioner(grid, weightClass.rounds[1][2], 3, 10);
-                        fightViewPositioner(grid, weightClass.rounds[1][3], 3, 14);
-                        fightViewPositioner(grid, weightClass.rounds[2][0], 5, 4);
-                        fightViewPositioner(grid, weightClass.rounds[2][1], 5, 12);
-                        fightViewPositioner(grid, weightClass.rounds[3][0], 7, 8);
-                        fightViewPositioner(grid, weightClass.rounds[4][0], 9, 8);                      
-                        break;
-
-                    case 16:
-                        fightViewPositioner(grid, weightClass.rounds[1][0], 3, 2);
-                        fightViewPositioner(grid, weightClass.rounds[1][1], 3, 6);
-                        fightViewPositioner(grid, weightClass.rounds[1][2], 3, 10);
-                        fightViewPositioner(grid, weightClass.rounds[1][3], 3, 14);
-                        fightViewPositioner(grid, weightClass.rounds[2][0], 5, 4);
-                        fightViewPositioner(grid, weightClass.rounds[2][1], 5, 12);
-                        fightViewPositioner(grid, weightClass.rounds[3][0], 7, 8);
-                        fightViewPositioner(grid, weightClass.rounds[4][0], 9, 8);                                     
-                        break;
-
-                    case 17:
-                        fightViewPositioner(grid, weightClass.rounds[1][0], 3, 2);
-                        fightViewPositioner(grid, weightClass.rounds[1][1], 3, 6);
-                        fightViewPositioner(grid, weightClass.rounds[1][2], 3, 10);
-                        fightViewPositioner(grid, weightClass.rounds[1][3], 3, 14);
-                        fightViewPositioner(grid, weightClass.rounds[2][0], 5, 4);
-                        fightViewPositioner(grid, weightClass.rounds[2][1], 5, 12);
-                        fightViewPositioner(grid, weightClass.rounds[3][0], 7, 8);
-                        fightViewPositioner(grid, weightClass.rounds[4][0], 9, 8);
-                        fightViewPositioner(grid, weightClass.rounds[5][0], 11, 8);
-                        break;
-
-                    case 18:
-                        fightViewPositioner(grid, weightClass.rounds[1][0], 3, 2);
-                        fightViewPositioner(grid, weightClass.rounds[1][1], 3, 6);
-                        fightViewPositioner(grid, weightClass.rounds[1][2], 3, 10);
-                        fightViewPositioner(grid, weightClass.rounds[1][3], 3, 14);
-                        fightViewPositioner(grid, weightClass.rounds[2][0], 5, 4);
-                        fightViewPositioner(grid, weightClass.rounds[2][1], 5, 12);
-                        fightViewPositioner(grid, weightClass.rounds[3][0], 7, 8);
-                        fightViewPositioner(grid, weightClass.rounds[4][0], 9, 8);
-                        fightViewPositioner(grid, weightClass.rounds[5][0], 11, 8);
-                        break;
-
-                    case 19:
-                        fightViewPositioner(grid, weightClass.rounds[1][0], 3, 2);
-                        fightViewPositioner(grid, weightClass.rounds[1][1], 3, 6);
-                        fightViewPositioner(grid, weightClass.rounds[1][2], 3, 10);
-                        fightViewPositioner(grid, weightClass.rounds[1][3], 3, 14);
-                        fightViewPositioner(grid, weightClass.rounds[1][4], 3, 18);
-                        fightViewPositioner(grid, weightClass.rounds[2][0], 5, 5);
-                        fightViewPositioner(grid, weightClass.rounds[2][1], 5, 15);
-                        fightViewPositioner(grid, weightClass.rounds[3][0], 7, 10);
-                        fightViewPositioner(grid, weightClass.rounds[4][0], 9, 10);
-                        fightViewPositioner(grid, weightClass.rounds[5][0], 11, 10);                  
-                        break;
-
-                    case 20:
-                        fightViewPositioner(grid, weightClass.rounds[1][0], 3, 2);
-                        fightViewPositioner(grid, weightClass.rounds[1][1], 3, 6);
-                        fightViewPositioner(grid, weightClass.rounds[1][2], 3, 10);
-                        fightViewPositioner(grid, weightClass.rounds[1][3], 3, 14);
-                        fightViewPositioner(grid, weightClass.rounds[1][4], 3, 18);
-                        fightViewPositioner(grid, weightClass.rounds[2][0], 5, 5);
-                        fightViewPositioner(grid, weightClass.rounds[2][1], 5, 15);
-                        fightViewPositioner(grid, weightClass.rounds[3][0], 7, 10);
-                        fightViewPositioner(grid, weightClass.rounds[4][0], 9, 10);
-                        fightViewPositioner(grid, weightClass.rounds[5][0], 11, 10);      
-                        break;
-
-                    default:
-                        throw new GDCException("Error in fighter count of weightCategory " + weightClass.category);
-                        break;
-                }
-                
-            }
-            catch (Exception exc)
-            {
-                throw new GDCException("Error in method positionFightViews(parameters): " + exc.Message);
-            }
-        }
-
-        private void fightViewPositioner(Grid grid, FightView fightView, int x, int y)
-        {
-            try
-            {
-                grid.Children.Add(fightView);
-                Grid.SetColumn(fightView, x);
-                Grid.SetRow(fightView, y);
-            }
-            catch (Exception exc)
-            {
-                throw new GDCException("Error in method fightViewPositioner(parameters): " + exc.Message);
-            }
-        }
-
-        //method adds FightView to Grid and sets position on Grid based on two integer values as starting point
-        //and an int as interval between fightViews in the column
-        private void fightViewPerRoundPositioner(Grid grid, List<FightView> list, int x, int y, int interval)
-        {
-            try
-            {
-                if (list != null)
-                {
-                    foreach (FightView fightView in list)
-                    {
-                        grid.Children.Add(fightView);
-                        Grid.SetColumn(fightView, x);
-                        Grid.SetRow(fightView, y);
-
-                        y += interval;
-                    }
-                }
-            }
-            catch (Exception exc)
-            {
-                throw new GDCException("Error in method fightViewPerRoundPositioner(parameters): " + exc.Message);
-            }
-        }*/
-
-
-        //NEW METHODS FOR FIGHTVIEW POSITIONING
+      
+        //METHODS FOR FIGHTVIEW POSITIONING
 
         //method to set the last column
         public void setRow6(Grid grid, WeightClass weightClass)
@@ -424,7 +317,6 @@ namespace GoldenDragonCup
             }
         }
 
-
         //method to set column 4 and 5
         public void setRow45(Grid grid, WeightClass weightClass)
         {
@@ -440,8 +332,8 @@ namespace GoldenDragonCup
                     }
 
                     if (i == 3) //it's a round robin
-                    {                  
-                        
+                    {
+
                         List<FightView> robinThree = weightClass.rounds[weightClass.rounds.Count - 1];
                         grid.Children.Add(robinThree[0]);
                         Grid.SetColumn(robinThree[0], 11);
@@ -475,6 +367,10 @@ namespace GoldenDragonCup
                         Grid.SetColumn(semiFinal[1], 7);
                         Grid.SetRow(semiFinal[1], 6);
                     }
+                }
+                else
+                {
+                    setRow6(grid, weightClass);
                 }
             }
             catch (Exception exc)
@@ -527,14 +423,14 @@ namespace GoldenDragonCup
                         {
                             y++;
                         }
-                        
+
                         grid.Children.Add(eighthFinal[i]);
                         Grid.SetColumn(eighthFinal[i], 3);
                         Grid.SetRow(eighthFinal[i], y);
                     }
                 }
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 MessageBox.Show("Error in method setRow2(parameters): " + exc.Message);
                 throw new GDCException("Error in method setRow2(parameters): " + exc.Message);
@@ -579,10 +475,10 @@ namespace GoldenDragonCup
                 {
                     foreach (WeightClass weightClass in tournament.weightClasses)
                     {
-                        if(i < weightClass.rounds.Count)
-                        {             
+                        if (i < weightClass.rounds.Count)
+                        {
                             foreach (FightView fightView in weightClass.rounds[i])
-                            {                         
+                            {
                                 lstb_fights.Items.Add(fightView.ToString());
                             }
                         }
@@ -597,27 +493,91 @@ namespace GoldenDragonCup
         }
 
 
-        //METHOD TO IMPORT EXCEL FIGHTERS
-
-        private void readFightersFromFile()
+        //STARTING A NEW TOURNAMENT
+        //Starting a new tournament
+        private void btn_newTournament_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                readFightersFromFile(createOpenFileDialog());
 
-                //var fileName = string.Format("{0}\\gdc.xlsx", Directory.GetCurrentDirectory());
-                string fileName = string.Format("{0}\\gdc.xlsx", Directory.GetCurrentDirectory());
-                //var connectionString = string.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;", fileName);
-                string connectionString = string.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;", fileName);
-                //var adapter = new OleDbDataAdapter("SELECT * FROM [Blad1$]", connectionString);
-                OleDbDataAdapter adapter = new OleDbDataAdapter("SELECT * FROM [Blad1$]", connectionString);
-                //var ds = new DataSet();
-                DataSet ds = new DataSet();
+                //tournament = new Tournament("Golden Dragon Cup 2014", allFighters);
+                tournament = new Tournament("Golden Dragon Cup 2014", createTestFighters());
+                createTabsforWeightClasses();
+                createTrees();
+                fightViewsToListBox();
 
-                adapter.Fill(ds);
+                /*
+                foreach (WeightClass weightClass in tournament.weightClasses)
+                {
+                    if (weightClass.category == "FC M +55")
+                    {
+                        foreach (FightView fightView in weightClass.rounds[0])
+                        {
+                            MessageBox.Show(fightView.ToString());
+                        }
+                    }
+                }*/
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error in method btn_newTournament_Click(params): " + exc.Message);
+                throw new GDCException("Error in method btn_newTournament_Click(params): " + exc.Message);
+            }
+        }
 
-                DataTable data = ds.Tables[0];
+        //method to open a filedialog to import an excel file
+        private string createOpenFileDialog()
+        {
+            try
+            {
+                // Create OpenFileDialog 
+                Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+                String filename = null;
 
-                foreach (DataRow row in data.Rows)
+                // Set filter for file extension and default file extension 
+                dlg.DefaultExt = ".txt";
+                dlg.Filter = "EXCEL Files (*.xls)|*.xlsx";
+
+                // Display OpenFileDialog by calling ShowDialog method 
+                Nullable<bool> result = dlg.ShowDialog();
+
+                // Get the selected file name and display in a TextBox 
+                if (result == true)
+                {
+                    // Open document 
+                    filename = dlg.FileName;
+                }
+
+                return filename;
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error in method createOpenFileDialog(): " + exc.Message);
+                throw new GDCException("Error in method createOpenFileDialog(): " + exc.Message);
+            }
+        }
+
+        //method to import data from excel, create fighters from data and add fighters to allFighters arraylist
+        private void readFightersFromFile(string file)
+        {
+            try
+            {
+                string conn = string.Format("Provider=Microsoft.ACE.OLEDB.12.0; Data Source={0}; Extended Properties='Excel 12.0;HDR=Yes';", file);
+                
+                OleDbConnection objConn = new OleDbConnection(conn);            
+                objConn.Open();
+                OleDbCommand objCmdSelect = new OleDbCommand("SELECT * FROM [Blad1$]", objConn);
+                OleDbDataAdapter objAdapter = new OleDbDataAdapter(); 
+                objAdapter.SelectCommand = objCmdSelect;   
+                DataSet objDataset = new DataSet();  
+                objAdapter.Fill(objDataset); 
+                objConn.Close();
+
+                //objTable contains excel data
+                DataTable objTable = objDataset.Tables[0];
+
+                foreach (DataRow row in objTable.Rows)
                 {
                     string firstName = row["Naam"].ToString();
                     string lastName = row["Voornaam"].ToString();
@@ -627,6 +587,7 @@ namespace GoldenDragonCup
 
                     Fighter newFighter = new Fighter(firstName, lastName, club, clubLocation, category);
                     allFighters.Add(newFighter);
+              
                 }
             }
             catch (Exception exc)
