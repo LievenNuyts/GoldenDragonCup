@@ -31,5 +31,14 @@ namespace GoldenDragonCup
             this.clubLocation = clubLocation;
             this.category = category;
         }
+
+        public override string ToString()
+        {
+            string fighter = "Name: " + this.lastName + " " + this.firstName + "\n" +
+                                "Club: " + this.club + ", " + this.clubLocation + "\n" +
+                                    "Category: " + this.category;
+
+            return fighter;
+        }
     }
 }

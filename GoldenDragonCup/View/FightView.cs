@@ -111,11 +111,13 @@ namespace GoldenDragonCup.View
 
 
                 //add click event to buttons linked to click method
-                btn_fighter1.Click += this.btn_fighter1_Click; //check if this is correct
+                btn_fighter1.Click += this.btn_fighter1_Click;
+                btn_fighter1.MouseRightButtonDown += this.btn_fighter1_RightClick;
                 btn_fighter2.Click += this.btn_fighter2_Click;
+                btn_fighter2.MouseRightButtonDown += this.btn_fighter2_RightClick;
                 btn_confirm.Click += this.btn_confirm_Click;
 
-
+                
                 //initialise grid
                 grid = new Grid();
                 grid.Width = 115;
@@ -163,9 +165,11 @@ namespace GoldenDragonCup.View
         }
 
         
-        //events for buttons
+        //EVENTS FOR BUTTONS
+        //left button click to select fighter 2 as the winner
         private void btn_fighter1_Click(object sender, RoutedEventArgs e)
         {       
+            
             if (btn_confirm.Content.ToString() != "X")
             {
                 winner = fighter1;
@@ -177,6 +181,13 @@ namespace GoldenDragonCup.View
             //txtb_winner.Foreground = btn_fighter1.Foreground;
         }
 
+        //right button click to show info about fighter 1
+        private void btn_fighter1_RightClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(fighter1.ToString());
+        }
+   
+        //left button click to select fighter 2 as the winner
         private void btn_fighter2_Click(object sender, RoutedEventArgs e)
         {
             if (btn_confirm.Content.ToString() != "X")
@@ -189,6 +200,13 @@ namespace GoldenDragonCup.View
             //txtb_winner.Text = btn_fighter2.Content.ToString();
             //txtb_winner.Foreground = btn_fighter2.Foreground;
         }
+
+        //right button click to show info about fighter 2
+        private void btn_fighter2_RightClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(fighter2.ToString());
+        }
+   
 
         private void btn_confirm_Click(object sender, RoutedEventArgs e)
         {
