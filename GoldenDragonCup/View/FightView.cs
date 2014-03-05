@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -12,11 +13,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace GoldenDragonCup.View
 {
   
     public class FightView : GroupBox //is a type of GroupBox
-    {      
+    {
+
         public WeightClass weightClass;
         
         //public int fightCounter; // int to count the fights in a weightclass, also used for header of groupBox.
@@ -25,8 +28,28 @@ namespace GoldenDragonCup.View
         private Fighter fighter2; 
         public Fighter winner;
 
-        public bool inProgress; //true if this fight is currently in progress
-         
+        private bool inProgress; //true if this fight is currently in progress
+
+        public bool INPROGRESS //property for coloring the active fightView
+        {
+            get { return inProgress;}
+            set 
+            { 
+                inProgress = value;
+
+                if (inProgress == true)
+                {
+                    this.BorderBrush = Brushes.Gold;
+                    this.Foreground = Brushes.Gold;
+                }
+                else //(inProgress == false)
+                {
+                    this.ClearValue(GroupBox.BorderBrushProperty);
+                    this.Foreground = Brushes.White;
+                }        
+            }
+        }
+
         public Button btn_fighter1, btn_fighter2, btn_confirm;
         //public Label lbl_winner;
         //public TextBox txtb_winner;
@@ -36,9 +59,10 @@ namespace GoldenDragonCup.View
         public FightView(WeightClass weightClass)
         {
             try
-            {
+            {             
                 this.weightClass = weightClass;
-                initialise();
+                this.inProgress = false;
+                initialise();          
             }
             catch (Exception exc)
             {
@@ -69,7 +93,7 @@ namespace GoldenDragonCup.View
             try
             {
                 //dimensions of the group box
-                this.Foreground = Brushes.Gold;
+                this.Foreground = Brushes.White;
                 this.Width = 130;
                 this.Height = 80;
 
@@ -164,7 +188,7 @@ namespace GoldenDragonCup.View
             }
         }
 
-        
+
         //EVENTS FOR BUTTONS
         //left button click to select fighter 2 as the winner
         private void btn_fighter1_Click(object sender, RoutedEventArgs e)
@@ -212,15 +236,14 @@ namespace GoldenDragonCup.View
         {
             try
             {
-
                 if (btn_confirm.Content.ToString() == "X") // = undo button
-                {
+                {                              
                     //reactivate buttons
                     btn_confirm.Content = "OK";
                     btn_confirm.Foreground = Brushes.Black;
                     btn_fighter1.ClearValue(Button.BackgroundProperty);
                     btn_fighter2.ClearValue(Button.BackgroundProperty);
-                    winner = null;
+                    
 
                     //fighter hasn't been transferred to next round if in finals or in a round robin
                     if (Header.ToString().ToUpper() != "FINAL" && Header.ToString().Substring(0, 5) != "ROBIN")
@@ -255,6 +278,10 @@ namespace GoldenDragonCup.View
                             }
                         }
                     }
+                    
+                    winner = null;
+                    //adjust listbox
+                    this.weightClass.tournament.window.oneUp(false);
                 }
                 else //(btn_confirm.Content.ToString() == "OK")
                 {
@@ -268,6 +295,9 @@ namespace GoldenDragonCup.View
 
                         btn_confirm.Content = "X";
                         btn_confirm.Foreground = Brushes.Red;
+                        
+                        //adjust listbox
+                        this.weightClass.tournament.window.oneUp(true);
                     }
                     else
                     {
@@ -382,10 +412,12 @@ namespace GoldenDragonCup.View
             {
                 string f1;
                 string f2;
+                string adjHeader;
+                string adjWeightClass;
             
                 if (fighter1 == null)
                 {
-                    f1 = "   *****   ";
+                    f1 = "   ******   ";
                 }
                 else
                 {
@@ -394,26 +426,52 @@ namespace GoldenDragonCup.View
 
                 if (fighter2 == null)
                 {
-                    f2 = "   *****   ";
+                    f2 = "   ******   ";
                 }
                 else
                 {
                     f2 = fighter2.lastName + " " + fighter2.firstName[0];
                 }
-             
+
                 if (this.Header == null)
                 {
-                    this.Header = "";
+                    adjHeader = "";
+                }
+                else
+                {
+                    if (this.Header.ToString() == "final")
+                    {
+                        adjHeader = "    " + this.Header.ToString() + "    ";
+                    }
+                    else if (this.Header.ToString() == "FINAL")
+                    {
+                        adjHeader = "   " + this.Header.ToString() + "  ";
+                    }               
+                    else
+                    {
+                        adjHeader = this.Header.ToString();
+                    }
                 }
 
-                return weightClass.category + "  [" + this.Header.ToString() + "] :  " +
+                if (weightClass.category.Length == 8)
+                {
+                    adjWeightClass = weightClass.category + " ";
+                }
+                else
+                {
+                    adjWeightClass = weightClass.category;
+                }
+
+                return adjWeightClass + "  [" + adjHeader + "] :  " +
                         f1.ToUpper() + "  vs. " + f2.ToUpper();
+
             }
             catch (Exception exc)
             {
                 throw new GDCException("Error in method override string ToString(): " + exc.Message);
             }
         }
+
 
         //setter methodes
         public void setFighter1(Fighter fighter)

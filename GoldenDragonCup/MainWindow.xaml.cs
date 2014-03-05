@@ -25,6 +25,7 @@ namespace GoldenDragonCup
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public Tournament tournament;
         public ArrayList allFighters;
         //static Random random;
@@ -42,178 +43,7 @@ namespace GoldenDragonCup
             }
         }
 
-        private ArrayList createTestFighters()
-        {
-            /*
-            ArrayList fighters = new ArrayList();
-            
-            Fighter fighter1 = new Fighter("Jan", "Jansens", "Long Hu Men", "Leuven, Belgium", "FC M +65");
-            fighters.Add(fighter1);
-
-            Fighter fighter2 = new Fighter("Pol", "Vereycken", "Golden Phoenix", "Brussel, Belgium", "FC M +65");
-            fighters.Add(fighter2);
-
-            Fighter fighter3 = new Fighter("Jeroen", "Vanhoeck", "Long Hu Men", "Vilvoorde, Belgium", "FC M +65");
-            fighters.Add(fighter3);
-
-            Fighter fighter4 = new Fighter("Jaak", "Clymans", "Golden Phoenix", "Brussel, Belgium", "FC M +65");
-            fighters.Add(fighter4);
-
-            Fighter fighter5 = new Fighter("Raf", "Evens", "Long Hu Men", "Leuven, Belgium", "FC M +65");
-            fighters.Add(fighter5);
-
-
-            Fighter fighter6 = new Fighter("Pieter", "Vermeulen", "Golden Phoenix", "Brussel, Belgium", "FC M +65");
-            fighters.Add(fighter6);
-
-            Fighter fighter7 = new Fighter("Joris", "Peters", "Long Hu Men", "Leuven, Belgium", "FC M +65");
-            fighters.Add(fighter7);
-
-
-            for (int i = 1; i < 21; i++)
-            {
-                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +55");
-                fighters.Add(fighter);
-            }*/
-
-
-            return createFightersUpTo10();
-            //return createFightersUpTo20();
-     
-        }
-
-        //Test method
-        public ArrayList createFightersUpTo10()
-        {
-            ArrayList fighters = new ArrayList();
-            
-            //create fighters 2 - 10
-            for (int i = 1; i < 3; i++)
-            {
-                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +55");
-                fighters.Add(fighter);
-            }
-
-            for (int i = 1; i < 4; i++)
-            {
-                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +60");
-                fighters.Add(fighter);
-            }
-
-            for (int i = 1; i < 5; i++)
-            {
-                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +65");
-                fighters.Add(fighter);
-            }
-
-            for (int i = 1; i < 6; i++)
-            {
-                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +70");
-                fighters.Add(fighter);
-            }
-
-            for (int i = 1; i < 7; i++)
-            {
-                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +75");
-                fighters.Add(fighter);
-            }
-
-            for (int i = 1; i < 8; i++)
-            {
-                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +80");
-                fighters.Add(fighter);
-            }
-
-            for (int i = 1; i < 9; i++)
-            {
-                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +85");
-                fighters.Add(fighter);
-            }
-
-            for (int i = 1; i < 10; i++)
-            {
-                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +90");
-                fighters.Add(fighter);
-            }
-
-            for (int i = 1; i < 11; i++)
-            {
-                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +95");
-                fighters.Add(fighter);
-            }
-
-            return fighters;
-        }
-
-        //Test method
-        public ArrayList createFightersUpTo20()
-        {
-            ArrayList fighters = new ArrayList();
-
-            //create fighters 11-20
-            for (int i = 1; i < 12; i++)
-            {
-                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +55");
-                fighters.Add(fighter);
-            }
-
-            for (int i = 1; i < 13; i++)
-            {
-                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +60");
-                fighters.Add(fighter);
-            }
-
-            for (int i = 1; i < 14; i++)
-            {
-                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +65");
-                fighters.Add(fighter);
-            }
-
-            for (int i = 1; i < 15; i++)
-            {
-                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +70");
-                fighters.Add(fighter);
-            }
-
-            for (int i = 1; i < 16; i++)
-            {
-                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +75");
-                fighters.Add(fighter);
-            }
-
-            for (int i = 1; i < 17; i++)
-            {
-                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +80");
-                fighters.Add(fighter);
-            }
-
-            for (int i = 1; i < 18; i++)
-            {
-                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +85");
-                fighters.Add(fighter);
-            }
-
-            for (int i = 1; i < 19; i++)
-            {
-                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +90");
-                fighters.Add(fighter);
-            }
-
-            for (int i = 1; i < 20; i++)
-            {
-                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +95");
-                fighters.Add(fighter);
-            }
-
-            for (int i = 1; i < 21; i++)
-            {
-                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +100");
-                fighters.Add(fighter);
-            }
-
-            return fighters;
-        }
-
+        #region METHODS TO CREATE TABS AND TREES
 
         private void createTabsforWeightClasses()
         {
@@ -266,6 +96,7 @@ namespace GoldenDragonCup
             }
         }
 
+
         private void createTrees()
         {
             try
@@ -297,8 +128,10 @@ namespace GoldenDragonCup
             }
         }
 
+        #endregion
+
       
-        //METHODS FOR FIGHTVIEW POSITIONING
+        #region METHODS FOR FIGHTVIEW POSITIONING
 
         //method to set the last column
         public void setRow6(Grid grid, WeightClass weightClass)
@@ -463,14 +296,18 @@ namespace GoldenDragonCup
             }
         }
 
+        #endregion
 
 
-        //METHOD TO ADD FIGHTS TO LISTBOX (TO SHOW PROGRESS)
+        #region METHODS FOR LISTBOX
 
+        //method to populate listbox
         private void fightViewsToListBox()
         {
             try
             {
+                int counter = 0;
+                
                 for (int i = 0; i < 6; i++)
                 {
                     foreach (WeightClass weightClass in tournament.weightClasses)
@@ -480,10 +317,19 @@ namespace GoldenDragonCup
                             foreach (FightView fightView in weightClass.rounds[i])
                             {
                                 lstb_fights.Items.Add(fightView.ToString());
+
+                                if (counter == 0)
+                                {
+                                    makeItGlow(fightView, null);
+                                }
+
+                                counter++;
                             }
                         }
                     }
                 }
+
+                lstb_fights.SelectedIndex = 0;
             }
             catch (Exception exc)
             {
@@ -491,6 +337,104 @@ namespace GoldenDragonCup
                 throw new GDCException("Error in method fightViewsToListBox(): " + exc.Message);
             }
         }
+
+        //overload method to populate listbox
+        //index added to be able to use the makeItGlow() method
+        private void fightViewsToListBox(int index)
+        {
+            FightView fightViewNew = null;
+            FightView fightViewOld = null;
+            
+            try
+            {
+                int counter = 0;
+                
+                for (int i = 0; i < 6; i++)
+                {
+                    foreach (WeightClass weightClass in tournament.weightClasses)
+                    {
+                        if (i < weightClass.rounds.Count)
+                        {
+                            foreach (FightView fightView in weightClass.rounds[i])
+                            {
+                                lstb_fights.Items.Add(fightView.ToString());
+
+                                if (counter == index - 1)
+                                {
+                                    fightViewOld = fightView;
+                                }                         
+                                
+                                if (counter == index)
+                                {
+                                    fightViewNew = fightView;
+                                }
+
+                                counter++;
+                            }
+                        }
+                    }
+                }
+
+                makeItGlow(fightViewNew, fightViewOld);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error in method fightViewsToListBox(int index): " + exc.Message);
+                throw new GDCException("Error in method fightViewsToListBox(int index): " + exc.Message);
+            }
+        }
+
+        //method to update listbox after each finished fight (or undo)
+        public void oneUp(Boolean up)
+        {
+            int index = lstb_fights.SelectedIndex;
+
+            if (up) //if true goes one up
+            {
+                index++;
+            }
+            else //if false goes one down
+            {
+                index--;
+            }
+
+            //clear and reload the listbox
+            lstb_fights.Items.Clear();
+            fightViewsToListBox(index);
+            //set selection according to new index
+            lstb_fights.SelectedIndex = index;
+        }
+
+
+        //method that 'colors' the tab and fightview of the current active fight
+        public void makeItGlow(FightView fightViewNew, FightView fightViewOld)
+        {
+            //remove color from previous active tab
+            foreach (TabItem item in tabControl.Items)
+            {
+                item.ClearValue(TabItem.BackgroundProperty);           
+            }
+
+            //color the tabtext of the active fight
+            foreach (TabItem item in tabControl.Items)
+            {
+                if (item.Header.ToString() == fightViewNew.weightClass.category)
+                {
+                    item.Background = Brushes.Gold;
+                }                    
+            }
+
+            //color the active fight
+            fightViewNew.INPROGRESS = true;
+
+            //remove color from previous active fight
+            if (fightViewOld != null)
+            {         
+                fightViewOld.INPROGRESS = false;
+            }
+        }
+
+        #endregion
 
 
         //STARTING A NEW TOURNAMENT
@@ -501,23 +445,12 @@ namespace GoldenDragonCup
             {
                 readFightersFromFile(createOpenFileDialog());
 
-                //tournament = new Tournament("Golden Dragon Cup 2014", allFighters);
-                tournament = new Tournament("Golden Dragon Cup 2014", createTestFighters());
+                //tournament = new Tournament("Golden Dragon Cup 2014", allFighters, this);
+                tournament = new Tournament("Golden Dragon Cup 2014", createTestFighters(), this);
                 createTabsforWeightClasses();
                 createTrees();
                 fightViewsToListBox();
 
-                /*
-                foreach (WeightClass weightClass in tournament.weightClasses)
-                {
-                    if (weightClass.category == "FC M +55")
-                    {
-                        foreach (FightView fightView in weightClass.rounds[0])
-                        {
-                            MessageBox.Show(fightView.ToString());
-                        }
-                    }
-                }*/
             }
             catch (Exception exc)
             {
@@ -525,6 +458,9 @@ namespace GoldenDragonCup
                 throw new GDCException("Error in method btn_newTournament_Click(params): " + exc.Message);
             }
         }
+
+
+        #region METHODS FOR EXCEL IMPORT
 
         //method to open a filedialog to import an excel file
         private string createOpenFileDialog()
@@ -596,5 +532,192 @@ namespace GoldenDragonCup
                 throw new GDCException("Error in method readFightersFromFile(): " + exc.Message);
             }
         }
+
+        #endregion
+
+
+        #region TEST METHODS
+
+        //method to create test fighters (not from excel file)
+        private ArrayList createTestFighters()
+        {
+            /*
+            ArrayList fighters = new ArrayList();
+            
+            Fighter fighter1 = new Fighter("Jan", "Jansens", "Long Hu Men", "Leuven, Belgium", "FC M +65");
+            fighters.Add(fighter1);
+
+            Fighter fighter2 = new Fighter("Pol", "Vereycken", "Golden Phoenix", "Brussel, Belgium", "FC M +65");
+            fighters.Add(fighter2);
+
+            Fighter fighter3 = new Fighter("Jeroen", "Vanhoeck", "Long Hu Men", "Vilvoorde, Belgium", "FC M +65");
+            fighters.Add(fighter3);
+
+            Fighter fighter4 = new Fighter("Jaak", "Clymans", "Golden Phoenix", "Brussel, Belgium", "FC M +65");
+            fighters.Add(fighter4);
+
+            Fighter fighter5 = new Fighter("Raf", "Evens", "Long Hu Men", "Leuven, Belgium", "FC M +65");
+            fighters.Add(fighter5);
+
+            Fighter fighter6 = new Fighter("Pieter", "Vermeulen", "Golden Phoenix", "Brussel, Belgium", "FC M +65");
+            fighters.Add(fighter6);
+
+            Fighter fighter7 = new Fighter("Joris", "Peters", "Long Hu Men", "Leuven, Belgium", "FC M +65");
+            fighters.Add(fighter7);
+
+            Fighter fighter8 = new Fighter("Pieter", "Vermeulen", "Golden Phoenix", "Brussel, Belgium", "SFC M +65");
+            fighters.Add(fighter8);
+
+            Fighter fighter9 = new Fighter("Joris", "Peters", "Long Hu Men", "Leuven, Belgium", "SFC M +65");
+            fighters.Add(fighter9);
+
+
+            for (int i = 1; i < 21; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +55");
+                fighters.Add(fighter);
+            }
+
+            return fighters;*/
+
+            //return createFightersUpTo10();
+            return createFightersUpTo20();
+
+        }
+
+        //Test method to create testfighters groups of 2 to 10
+        public ArrayList createFightersUpTo10()
+        {
+            ArrayList fighters = new ArrayList();
+
+            //create fighters 2 - 10
+            for (int i = 1; i < 3; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +55");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 4; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +60");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 5; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +65");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 6; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +70");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 7; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +75");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 8; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +80");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 9; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +85");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 10; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +90");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 11; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +95");
+                fighters.Add(fighter);
+            }
+
+            return fighters;
+        }
+
+        //Test method to create testfighters groups of 10 to 20
+        public ArrayList createFightersUpTo20()
+        {
+            ArrayList fighters = new ArrayList();
+
+            //create fighters 11-20
+            for (int i = 1; i < 12; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +55");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 13; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +60");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 14; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +65");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 15; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +70");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 16; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +75");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 17; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +80");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 18; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +85");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 19; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +90");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 20; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +95");
+                fighters.Add(fighter);
+            }
+
+            for (int i = 1; i < 21; i++)
+            {
+                Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +100");
+                fighters.Add(fighter);
+            }
+
+            return fighters;
+        }
+
+
+        #endregion
     }
 }

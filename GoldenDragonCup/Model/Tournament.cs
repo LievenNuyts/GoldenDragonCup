@@ -8,6 +8,7 @@ namespace GoldenDragonCup
 {
     public class Tournament
     {
+        public MainWindow window;
         public string name;
         public ArrayList weightClassCodes;
         public ArrayList weightClasses; //list of the weightclasses that are available in the competition
@@ -15,10 +16,12 @@ namespace GoldenDragonCup
 
         public Tournament() { }
 
-        public Tournament(string name, ArrayList allFighters)
+        public Tournament(string name, ArrayList allFighters, MainWindow window)
         {
             try
-            {            
+            {
+
+                this.window = window;
                 this.name = name;
                 this.allFighters = allFighters;
                 

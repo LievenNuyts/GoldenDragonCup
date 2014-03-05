@@ -3,15 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="442" Width="693" WindowState="Maximized">
     <Grid Name="mainGrid" Background="#FF4B0000">
-        <TabControl Height="Auto" HorizontalAlignment="Stretch" Name="tabControl" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="0,0,265,0">
+        <TabControl Height="Auto" HorizontalAlignment="Stretch" Name="tabControl" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="0,0,371,0">
             <TabItem Header="Controls" Name="Controls">
                 <Grid Name="ControlGrid" Background="Crimson">
-                    <Button Content="New Tournament" Height="32" HorizontalAlignment="Left" Margin="109,122,0,0" Name="btn_newTournament" VerticalAlignment="Top" Width="255" Click="btn_newTournament_Click" />
-                    <Button Content="Load Tournament" Height="32" HorizontalAlignment="Left" Margin="109,187,0,0" Name="btn_savedTournament" VerticalAlignment="Top" Width="255" />
-                    <Button Content="Create Result Lists" Height="32" HorizontalAlignment="Left" Margin="109,252,0,0" Name="btn_createLists" VerticalAlignment="Top" Width="255" />
+                    <Button Content="New Tournament" Height="32" HorizontalAlignment="Center" Margin="109,122,0,0" Name="btn_newTournament" VerticalAlignment="Top" Width="255" Click="btn_newTournament_Click" />
+                    <Button Content="Load Tournament" Height="32" HorizontalAlignment="Center" Margin="109,187,0,0" Name="btn_savedTournament" VerticalAlignment="Top" Width="255" />
+                    <Button Content="Create Result Lists" Height="32" HorizontalAlignment="Center" Margin="109,252,0,0" Name="btn_createLists" VerticalAlignment="Top" Width="255" />
                 </Grid>
             </TabItem>
         </TabControl>
-        <ListBox HorizontalAlignment="Right" Name="lstb_fights" VerticalAlignment="Stretch" Width="259" Background="Firebrick" />
+        <ListBox HorizontalAlignment="Right" Name="lstb_fights" VerticalAlignment="Stretch" Width="370" Background="Firebrick" IsEnabled="True" />
     </Grid>
 </Window>

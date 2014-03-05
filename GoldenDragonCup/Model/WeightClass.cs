@@ -163,7 +163,7 @@ namespace GoldenDragonCup
             {
                 int i = rounds.IndexOf(list) + 1;
                 
-                FightView fightView = new FightView(this);         
+                FightView fightView = new FightView(this);             
                 list.Add(fightView);
 
                 //check if the round only has three fighters and thus is a round robin
