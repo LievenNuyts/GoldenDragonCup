@@ -32,7 +32,7 @@ namespace GoldenDragonCup
             }
             catch (Exception exc)
             {
-                throw new GDCException("Error in constructor WeightClass(string, Tournament) " + exc.Message);
+                throw new Exception("Error in constructor WeightClass(string, Tournament) " + exc.Message);
             }
         }
 
@@ -52,7 +52,7 @@ namespace GoldenDragonCup
             }
             catch (Exception exc)
             {
-                throw new GDCException("Error in methode selectTournamentFighters() " + exc.Message);
+                throw new Exception("Error in methode selectTournamentFighters() " + exc.Message);
             }
         }
 
@@ -141,7 +141,7 @@ namespace GoldenDragonCup
             }
             catch (Exception exc)
             {
-                throw new GDCException("Error in method createFightViews() " + exc.Message);
+                throw new Exception("Error in method createFightViews() " + exc.Message);
             }
         }
 
@@ -201,7 +201,7 @@ namespace GoldenDragonCup
             }
             catch (Exception exc)
             {
-                throw new GDCException("Error in method addFightViewToRound(List<FightView> list) " + exc.Message);
+                throw new Exception("Error in method addFightViewToRound(List<FightView> list) " + exc.Message);
             }
         }
 
@@ -230,7 +230,7 @@ namespace GoldenDragonCup
             }
             catch (Exception exc)
             {
-                throw new GDCException("Error in method fightViewCreator(params) " + exc.Message);
+                throw new Exception("Error in method fightViewCreator(params) " + exc.Message);
             }
         }
 
@@ -239,7 +239,7 @@ namespace GoldenDragonCup
         {
             try
             {
-                if (roundRobinChecker()) //round robin
+                if (weightClassFighters.Count == 3) //round robin
                 {
                     FightView fvRound1 = rounds[0][0];
                     fvRound1.setFighter1(weightClassFighters[0]);
@@ -293,7 +293,7 @@ namespace GoldenDragonCup
             }
             catch (Exception exc)
             {
-                throw new GDCException("Error in method testMethodToAssignFightersToFightViews() " + exc.Message);
+                throw new Exception("Error in method testMethodToAssignFightersToFightViews() " + exc.Message);
             }
         }
 
@@ -309,7 +309,7 @@ namespace GoldenDragonCup
             }
             catch (Exception exc)
             {
-                throw new GDCException("Error in method selectFreeFighter(): " + exc.Message);
+                throw new Exception("Error in method selectFreeFighter(): " + exc.Message);
             }
         }
 
@@ -319,33 +319,101 @@ namespace GoldenDragonCup
             try
             {
                 List<Fighter> freeFighters = (from fighterX in weightClassFighters
-                                              where fighterX.isActive == true && fighterX.isSelected == false
+                                              where fighterX.isSelected == false
                                               select fighterX).ToList<Fighter>();
 
                 return freeFighters;
             }
             catch (Exception exc)
             {
-                throw new GDCException("Error in method createFreeFighterList(): " + exc.Message);
+                throw new Exception("Error in method createFreeFighterList(): " + exc.Message);
             }
         }
 
-        public bool roundRobinChecker()
+        //method that returns a list of unselected fighters of the weightclass who are of club X
+        private List<Fighter> createClubFreeFighterList(string club)
         {
-            int i = 0;
-            
-            foreach(List<FightView> list in rounds)
+            try
             {
-                i += list.Count;
-            }
+                List<Fighter> freeFighters = (from fighterX in weightClassFighters
+                                              where fighterX.isSelected == false && fighterX.club == club
+                                              select fighterX).ToList<Fighter>();
 
-            if (rounds.Count == 3 && i == 3)
-            {
-                return true;
+                return freeFighters;
             }
-            else
+            catch (Exception exc)
             {
-                return false;
+                throw new Exception("Error in method createClubFreeFighterList(string club): " + exc.Message);
+            }
+        }
+
+
+        //method to check which club has the most fighters in the weightclass
+        private List<string> clubCheckerMethod()
+        {
+            try
+            {
+
+                List<string> clubs = new List<string>();
+
+                string maxClub = null;
+                int maxClubCount = 0;
+
+                string secondClub = null;
+                int secondClubCount = 0;
+
+                string club = null;
+                int clubCount = 0;
+
+
+                for (int i = 0; i < weightClassFighters.Count; i++)
+                {
+                    clubCount = 0;
+                    club = null;
+
+                    club = weightClassFighters[i].club;
+
+                    foreach (Fighter fighter in weightClassFighters)
+                    {
+                        if (fighter.club == club)
+                        {
+                            clubCount++;
+                        }
+                    }
+
+                    if (clubCount > secondClubCount)
+                    {
+                        if (clubCount > maxClubCount && secondClubCount == 0) //only for the first loop
+                        {
+                            maxClubCount = clubCount;
+                            maxClub = club;
+                        }
+                        else if (clubCount > maxClubCount)
+                        {
+                            //biggest club becomes second biggest club
+                            secondClubCount = maxClubCount;
+                            secondClub = maxClub;
+
+                            //club becomes the new maxClub
+                            maxClubCount = clubCount;
+                            maxClub = club;
+                        }
+                        else
+                        {
+                            secondClubCount = clubCount;
+                            secondClub = club;
+                        }
+                    }
+                }
+
+                clubs.Add(maxClub);
+                clubs.Add(secondClub);
+
+                return clubs;
+            }
+            catch (Exception exc)
+            {
+                throw new Exception("Error in method clubCheckerMethod(): " + exc.Message);
             }
         }
     }

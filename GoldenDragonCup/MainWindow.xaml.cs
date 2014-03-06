@@ -425,7 +425,10 @@ namespace GoldenDragonCup
             }
 
             //color the active fight
-            fightViewNew.INPROGRESS = true;
+            if (fightViewNew != null)
+            {
+                fightViewNew.INPROGRESS = true;
+            }
 
             //remove color from previous active fight
             if (fightViewOld != null)
@@ -580,8 +583,8 @@ namespace GoldenDragonCup
 
             return fighters;*/
 
-            //return createFightersUpTo10();
-            return createFightersUpTo20();
+            return createFightersUpTo10();
+            //return createFightersUpTo20();
 
         }
 
