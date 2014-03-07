@@ -35,7 +35,7 @@ namespace GoldenDragonCup
         public override string ToString()
         {
             string fighter = "Name: " + this.lastName + " " + this.firstName + "\n" +
-                                "Club: " + this.club + ", " + this.clubLocation + "\n" +
+                                "Club: " + this.club + " - " + this.clubLocation + "\n" +
                                     "Category: " + this.category;
 
             return fighter;

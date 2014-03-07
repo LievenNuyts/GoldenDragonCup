@@ -355,7 +355,6 @@ namespace GoldenDragonCup
 
                         if (remaining != null && remaining.Count > 0)
                         {
-                            MessageBox.Show("fighter added");
                             FightView fightView = rounds[1][counter];
                             fightView.setFighter1(selectFreeFighter(remaining));
                         }
@@ -538,7 +537,7 @@ namespace GoldenDragonCup
                 var randomizedList = list.OrderBy(a => Guid.NewGuid());
                 List<List<Fighter>> newList = randomizedList.ToList();
 
-                testMethodPairList(newList);
+                //testMethodPairList(newList);
 
                 return newList;
             }
