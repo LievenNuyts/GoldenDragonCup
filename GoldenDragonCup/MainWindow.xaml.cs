@@ -28,6 +28,7 @@ namespace GoldenDragonCup
         
         public Tournament tournament;
         public ArrayList allFighters;
+        public string excelFile;
         //static Random random;
 
         public MainWindow()
@@ -446,14 +447,17 @@ namespace GoldenDragonCup
         {
             try
             {
-                readFightersFromFile(createOpenFileDialog());
+                excelFile = createOpenFileDialog();
 
-                //tournament = new Tournament("Golden Dragon Cup 2014", allFighters, this);
-                tournament = new Tournament("Golden Dragon Cup 2014", createTestFighters(), this);
-                createTabsforWeightClasses();
-                createTrees();
-                fightViewsToListBox();
-
+                if (excelFile != null)
+                {
+                    readFightersFromFile(excelFile);
+                    //tournament = new Tournament("Golden Dragon Cup 2014", allFighters, this);
+                    tournament = new Tournament("Golden Dragon Cup 2014", createTestFighters(), this);
+                    createTabsforWeightClasses();
+                    createTrees();
+                    fightViewsToListBox();
+                }
             }
             catch (Exception exc)
             {
@@ -594,6 +598,7 @@ namespace GoldenDragonCup
             ArrayList fighters = new ArrayList();
 
             //create fighters 2 - 10
+            
             for (int i = 1; i < 3; i++)
             {
                 Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +55");
@@ -624,12 +629,14 @@ namespace GoldenDragonCup
                 fighters.Add(fighter);
             }
 
+            
             for (int i = 1; i < 8; i++)
             {
                 Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +80");
                 fighters.Add(fighter);
             }
 
+            
             for (int i = 1; i < 9; i++)
             {
                 Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +85");

@@ -5,6 +5,15 @@ using System.Linq;
 using System.Text;
 using GoldenDragonCup;
 using GoldenDragonCup.View;
+using System.Windows;
+
+
+
+
+
+
+
+
 
 namespace GoldenDragonCup
 {
@@ -234,7 +243,7 @@ namespace GoldenDragonCup
             }
         }
 
-
+        /*
         public void assignFightersToFightViews()
         {
             try
@@ -260,32 +269,32 @@ namespace GoldenDragonCup
                     {
                         if (fightView.getFighter1() == null)
                         {
-                            fightView.setFighter1(selectFreeFighter());
+                            fightView.setFighter1(selectFreeFighter(freeFighterList()));
                         }
 
                         if (fightView.getFighter2() == null)
                         {
-                            fightView.setFighter2(selectFreeFighter());
+                            fightView.setFighter2(selectFreeFighter(freeFighterList()));
                         }
                     }
 
-                    List<Fighter> freeFighters = createFreeFighterList();
+                    List<Fighter> freeFighters = freeFighterList();
 
                     //assign fighters to second round if needed
                     if (freeFighters.Count > 0)
                     {
                         foreach (FightView fightView in (List<FightView>)rounds[1])
                         {
-                            freeFighters = createFreeFighterList();
+                            freeFighters = freeFighterList();
 
                             if (freeFighters.Count >= 1 && fightView.getFighter1() == null)
                             {
-                                fightView.setFighter1(selectFreeFighter());
+                                fightView.setFighter1(selectFreeFighter(freeFighterList()));
                             }
 
                             if (freeFighters.Count > 1 && fightView.getFighter2() == null)
                             {
-                                fightView.setFighter2(selectFreeFighter());
+                                fightView.setFighter2(selectFreeFighter(freeFighterList()));
                             }
                         }
                     }
@@ -295,26 +304,88 @@ namespace GoldenDragonCup
             {
                 throw new Exception("Error in method testMethodToAssignFightersToFightViews() " + exc.Message);
             }
-        }
+        }*/
 
-        //method that returns a free random fighter from not selected fighters in the weightClass
-        private Fighter selectFreeFighter()
+        
+        public void assignFightersToFightViews()
         {
             try
             {
-                List<Fighter> freeFighters = createFreeFighterList();
-                Fighter fighter = freeFighters[random.Next(freeFighters.Count)];
-                fighter.isSelected = true;
-                return fighter;
+                if (weightClassFighters.Count == 3) //round robin
+                {
+                    FightView fvRound1 = rounds[0][0];
+                    fvRound1.setFighter1(weightClassFighters[0]);
+                    fvRound1.setFighter2(weightClassFighters[1]);
+
+                    FightView fvRound2 = rounds[1][0];
+                    fvRound2.setFighter1(weightClassFighters[0]);
+                    fvRound2.setFighter2(weightClassFighters[2]);
+
+                    FightView fvRound3 = rounds[2][0];
+                    fvRound3.setFighter1(weightClassFighters[1]);
+                    fvRound3.setFighter2(weightClassFighters[2]);
+                }
+                else //not round robin
+                {
+                    List<List<Fighter>> list = createPairedList(); //list of paired fighters is created
+         
+                    //assign fighters to the first round
+                    for (int i = 0; i < rounds[0].Count; i++)
+                    {
+                        FightView fightView = rounds[0][i]; //select first list of round one
+                        fightView.setFighter1(list[0][0]); //select list i in the list and assign the first fighter in that list of two
+                        fightView.setFighter2(list[0][1]); //select list i in the list and assign the second fighter in that list of two
+                        list.Remove(list[0]); //remove the 'used' pair from list
+                    }
+
+                    //assign fighters to second round if needed
+                    if (list.Count > 0)
+                    {
+                        int counter = 0;
+
+                        for (int i = 0; i < list.Count; i++, counter++)
+                        {
+                            FightView fightView = rounds[1][i]; //selecting FightViews from second round of the weightclass
+                            fightView.setFighter1(list[i][0]); //assigning first Fighter to FightView    
+                            fightView.setFighter2(list[i][1]); //assigning second Fighter to FightView                      
+                        }
+
+                        //there might be one free fighter left, which needs to be assigned
+                        List<Fighter> remaining = freeFighterList();
+
+                        if (remaining != null && remaining.Count > 0)
+                        {
+                            FightView fightView = rounds[1][counter];
+                            fightView.setFighter1(selectFreeFighter(remaining));
+                        }
+                    }
+                    else 
+                    {                                
+                        //check if there is still one free fighter that needs to be added to next round
+                        if (freeFighterList() != null && freeFighterList().Count > 0) 
+                        {
+                            FightView fightView = rounds[1][0];
+                            fightView.setFighter1(selectFreeFighter(weightClassFighters));
+                        }
+                    }
+
+                    if (freeFighterList() != null && freeFighterList().Count != 0)
+                    {
+                        throw new GDCException("Error in method assignFightersToFightViews() for weightclass " + this.category + " : there are still " + freeFighterList().Count.ToString() + " unassigned fighters!!");
+                    }
+                }      
             }
             catch (Exception exc)
             {
-                throw new Exception("Error in method selectFreeFighter(): " + exc.Message);
+                throw new Exception("Error in method assignFightersToFightViews() " + exc.Message);
             }
         }
 
+
+        #region METHODS TO PAIR FIGHTERS AND SELECT FREE FIGHTERS
+
         //method that returns a list of unselected fighters of the weightclass
-        private List<Fighter> createFreeFighterList()
+        private List<Fighter> freeFighterList()
         {
             try
             {
@@ -330,91 +401,164 @@ namespace GoldenDragonCup
             }
         }
 
-        //method that returns a list of unselected fighters of the weightclass who are of club X
-        private List<Fighter> createClubFreeFighterList(string club)
+        //create list of fighters not belonging to club x
+        private List<Fighter> freeFighterNonClubList(string club)
         {
             try
             {
-                List<Fighter> freeFighters = (from fighterX in weightClassFighters
-                                              where fighterX.isSelected == false && fighterX.club == club
+                List<Fighter> list = null;
+                
+                var freeFighters = (from fighterX in weightClassFighters
+                                              where fighterX.isSelected == false && fighterX.club != club
                                               select fighterX).ToList<Fighter>();
-
-                return freeFighters;
+                if (freeFighters.Count != 0)
+                {
+                    list = freeFighters.ToList();
+                }
+                
+                return list;
             }
             catch (Exception exc)
             {
-                throw new Exception("Error in method createClubFreeFighterList(string club): " + exc.Message);
+                throw new Exception("Error in method freeFighterNonClubList(string club): " + exc.Message);
             }
         }
 
 
-        //method to check which club has the most fighters in the weightclass
-        private List<string> clubCheckerMethod()
+        //returns random fighter from biggest free fighter club
+        private Fighter selectBigClubFreeFighter()
         {
             try
             {
-
-                List<string> clubs = new List<string>();
-
+                List<Fighter> list = freeFighterList();
+               
                 string maxClub = null;
                 int maxClubCount = 0;
 
-                string secondClub = null;
-                int secondClubCount = 0;
-
-                string club = null;
-                int clubCount = 0;
-
-
-                for (int i = 0; i < weightClassFighters.Count; i++)
+                for (int i = 0; i < list.Count; i++)
                 {
-                    clubCount = 0;
-                    club = null;
+                    int clubCount = 0;
+                    string club = list[i].club;
 
-                    club = weightClassFighters[i].club;
-
-                    foreach (Fighter fighter in weightClassFighters)
+                    foreach (Fighter fighter in list)
                     {
                         if (fighter.club == club)
                         {
                             clubCount++;
-                        }
-                    }
 
-                    if (clubCount > secondClubCount)
-                    {
-                        if (clubCount > maxClubCount && secondClubCount == 0) //only for the first loop
-                        {
-                            maxClubCount = clubCount;
-                            maxClub = club;
-                        }
-                        else if (clubCount > maxClubCount)
-                        {
-                            //biggest club becomes second biggest club
-                            secondClubCount = maxClubCount;
-                            secondClub = maxClub;
-
-                            //club becomes the new maxClub
-                            maxClubCount = clubCount;
-                            maxClub = club;
-                        }
-                        else
-                        {
-                            secondClubCount = clubCount;
-                            secondClub = club;
+                            if (clubCount > maxClubCount)
+                            {
+                                maxClubCount = clubCount;
+                                maxClub = club;
+                            }
                         }
                     }
                 }
 
-                clubs.Add(maxClub);
-                clubs.Add(secondClub);
+                List<Fighter> freeFighters = (from fighterX in list
+                                              where fighterX.club == maxClub
+                                              select fighterX).ToList<Fighter>();
 
-                return clubs;
+                return selectFreeFighter(freeFighters);
             }
             catch (Exception exc)
             {
-                throw new Exception("Error in method clubCheckerMethod(): " + exc.Message);
+                throw new Exception("Error in method selectBigClubFreeFighter(): " + exc.Message);
             }
         }
+
+        //returns random fighter from list NOT of club X
+        private Fighter selectNONBigClubFreeFighter(string club)
+        {
+            try
+            {
+                List<Fighter> freeFighters = (from fighterX in weightClassFighters
+                                              where fighterX.isSelected == false && fighterX.club != club
+                                              select fighterX).ToList<Fighter>();
+
+                return selectFreeFighter(freeFighters);          
+            }
+            catch (Exception exc)
+            {
+                throw new Exception("Error in method selectNONBigClubFreeFighter(string club): " + exc.Message);
+            }
+        }
+
+        //method that returns a free random fighter from not selected fighters in list fighters
+        //sets the selected fighter to isSelected = true to avoid duplicate fight assignment
+        private Fighter selectFreeFighter(List<Fighter> list)
+        {
+            try
+            {
+                Fighter fighter = list[random.Next(list.Count)];
+                fighter.isSelected = true;
+                return fighter;
+            }
+            catch (Exception exc)
+            {
+                throw new Exception("Error in method selectFreeFighter(List<Fighter> list): " + exc.Message);
+            }
+        }
+
+
+        //method that creates list of list<fighter> (always just 2 = paired fighters)
+        private List<List<Fighter>> createPairedList()
+        {
+            try
+            {
+                List<List<Fighter>> list = new List<List<Fighter>>();
+
+                do
+                {
+                    List<Fighter> pair = new List<Fighter>();
+
+                    //adding first fighter (of the biggest club)
+                    Fighter fighter = selectBigClubFreeFighter();
+                    pair.Add(fighter);
+
+                    //adding second fighter (if possible not from the biggest club)
+                    if (freeFighterNonClubList(fighter.club) != null) //if there are still fighters left not belonging to the big club
+                    {
+                        pair.Add(selectNONBigClubFreeFighter(fighter.club));
+                    }
+                    else //if only fighters left are from the big club
+                    {
+                        pair.Add(selectBigClubFreeFighter());
+                    }
+
+                    list.Add(pair);
+                }
+                while (freeFighterList().Count > 1); //keep on pairing till we drop below 2 remaining free fighters
+
+                //if one fighter remains, this is taken care of in the method assignFightersToFightViews()
+    
+                //randomize the list
+                var randomizedList = list.OrderBy(a => Guid.NewGuid());
+                List<List<Fighter>> newList = randomizedList.ToList();
+
+                //testMethodPairList(newList);
+
+                return newList;
+            }
+            catch (Exception exc)
+            {
+                throw new Exception("Error in method createPairedList(): " + exc.Message);
+            }
+        }
+
+        private void testMethodPairList(List<List<Fighter>> list)
+        {
+            string message = category + "\n\n";
+
+            foreach (List<Fighter> subList in list)
+            {
+                message += subList[0].lastName + " " + subList[0].firstName + " vs. " + 
+                            subList[1].lastName + " " + subList[1].firstName + "\n";
+            }
+
+            MessageBox.Show(message);
+        }
+
+        #endregion
     }
 }
