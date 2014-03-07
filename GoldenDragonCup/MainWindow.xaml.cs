@@ -532,15 +532,22 @@ namespace GoldenDragonCup
 
                 foreach (DataRow row in objTable.Rows)
                 {
+                    /*
                     string lastName = row["Naam"].ToString().Trim();
                     string firstName = row["Voornaam"].ToString().Trim();
                     string club = row["Club"].ToString().Trim();
                     string clubLocation = row["Locatie"].ToString().Trim();
+                    string category = row["Categorie"].ToString().Trim();*/
+
+                    string lastName = adjustUpperCase(row["Naam"].ToString().Trim());
+                    string firstName = adjustUpperCase(row["Voornaam"].ToString().Trim());
+                    string club = adjustUpperCase(row["Club"].ToString().Trim());
+                    string clubLocation = adjustUpperCase(row["Locatie"].ToString().Trim());
                     string category = row["Categorie"].ToString().Trim();
 
+
                     Fighter newFighter = new Fighter(firstName, lastName, club, clubLocation, category);
-                    allFighters.Add(newFighter);
-              
+                    allFighters.Add(newFighter);         
                 }
             }
             catch (Exception exc)
@@ -549,6 +556,76 @@ namespace GoldenDragonCup
                 throw new GDCException("Error in method readFightersFromFile(): " + exc.Message);
             }
         }
+
+
+        //method to detect string written in full capital and convert to regular format
+        private string adjustUpperCase(string text)
+        {
+            try
+            {
+                string adjusted = null;
+                
+                //remove any double spacing from the string
+                string cleanedString = System.Text.RegularExpressions.Regex.Replace(text, @"\s+", " ");
+                
+                //check if string is in upper case
+                if (isAllUpper(text))
+                {
+                    string toLower = cleanedString.ToLower(); //convert text to lower case
+
+                    //check how many parts the text has and convert each first letter of part to upper
+                    if (toLower.Contains(" "))
+                    {
+                        string[] words = toLower.Split(' '); //spit string at spaces
+
+                        foreach (string word in words)
+                        {
+                            //convert first letter of word to upper
+                            string firstLetterUp = word.First().ToString().ToUpper() + String.Join("", word.Skip(1));
+
+                            //find index of converted word
+                            int index = Array.IndexOf(words, word);
+
+                            if (index == words.Length - 1) //if element is the last element of the array we don't want a white space after
+                            {
+                                adjusted += firstLetterUp;
+                            }
+                            else
+                            {
+                                adjusted += firstLetterUp + " ";
+                            }
+                        }
+                    }
+                    else
+                    {
+                        adjusted = toLower.First().ToString().ToUpper() + String.Join("", toLower.Skip(1));
+                    }
+                }
+                else
+                {
+                    adjusted = cleanedString;
+                }
+
+                return adjusted;
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error in method adjustUpperCase(string text): " + exc.Message);
+                throw new Exception("Error in method adjustUpperCase(string text): " + exc.Message);
+            }
+        }
+
+        //method checks if text is all capital text
+        private bool isAllUpper(string text)
+        {
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (Char.IsLetter(text[i]) && !Char.IsUpper(text[i]))
+                    return false;
+            }
+            return true;
+        }
+
 
         #endregion
 
