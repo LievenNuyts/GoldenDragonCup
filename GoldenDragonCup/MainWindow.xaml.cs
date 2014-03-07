@@ -435,7 +435,8 @@ namespace GoldenDragonCup
         #endregion
 
 
-        //STARTING A NEW TOURNAMENT
+        #region MAIN CONTROL BUTTONS
+
         //Starting a new tournament
         private void btn_newTournament_Click(object sender, RoutedEventArgs e)
         {
@@ -446,8 +447,8 @@ namespace GoldenDragonCup
                 if (excelFile != null)
                 {
                     readFightersFromFile(excelFile);
-                    //tournament = new Tournament("Golden Dragon Cup 2014", allFighters, this);
-                    tournament = new Tournament("Golden Dragon Cup 2014", createTestFighters(), this);
+                    tournament = new Tournament("Golden Dragon Cup 2014", allFighters, this);
+                    //tournament = new Tournament("Golden Dragon Cup 2014", createTestFighters(), this);
                     createTabsforWeightClasses();
                     createTrees();
                     fightViewsToListBox();
@@ -459,6 +460,21 @@ namespace GoldenDragonCup
                 throw new GDCException("Error in method btn_newTournament_Click(params): " + exc.Message);
             }
         }
+
+        //load a previously saved tournament
+        private void btn_savedTournament_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //create list with complete tournament ranking
+        private void btn_createLists_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+        #endregion
 
 
         #region METHODS FOR EXCEL IMPORT
@@ -516,11 +532,11 @@ namespace GoldenDragonCup
 
                 foreach (DataRow row in objTable.Rows)
                 {
-                    string lastName = row["Naam"].ToString();
-                    string firstName = row["Voornaam"].ToString();
-                    string club = row["Club"].ToString();
-                    string clubLocation = row["Locatie"].ToString();
-                    string category = row["Categorie"].ToString();
+                    string lastName = row["Naam"].ToString().Trim();
+                    string firstName = row["Voornaam"].ToString().Trim();
+                    string club = row["Club"].ToString().Trim();
+                    string clubLocation = row["Locatie"].ToString().Trim();
+                    string category = row["Categorie"].ToString().Trim();
 
                     Fighter newFighter = new Fighter(firstName, lastName, club, clubLocation, category);
                     allFighters.Add(newFighter);
@@ -726,5 +742,6 @@ namespace GoldenDragonCup
 
 
         #endregion
+    
     }
 }

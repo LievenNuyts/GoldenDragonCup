@@ -7,8 +7,8 @@
             <TabItem Header="Controls" Name="Controls">
                 <Grid Name="ControlGrid" Background="Crimson">
                     <Button Content="New Tournament" Height="32" HorizontalAlignment="Center" Margin="109,122,0,0" Name="btn_newTournament" VerticalAlignment="Top" Width="255" Click="btn_newTournament_Click" />
-                    <Button Content="Load Tournament" Height="32" HorizontalAlignment="Center" Margin="109,187,0,0" Name="btn_savedTournament" VerticalAlignment="Top" Width="255" />
-                    <Button Content="Create Result Lists" Height="32" HorizontalAlignment="Center" Margin="109,252,0,0" Name="btn_createLists" VerticalAlignment="Top" Width="255" />
+                    <Button Content="Load Tournament" Height="32" HorizontalAlignment="Center" Margin="109,187,0,0" Name="btn_savedTournament" VerticalAlignment="Top" Width="255" Click="btn_savedTournament_Click" />
+                    <Button Content="Create Result Lists" Height="32" HorizontalAlignment="Center" Margin="109,252,0,0" Name="btn_createLists" VerticalAlignment="Top" Width="255" Click="btn_createLists_Click" />
                 </Grid>
             </TabItem>
         </TabControl>

@@ -66,7 +66,7 @@ namespace GoldenDragonCup.View
             }
             catch (Exception exc)
             {
-                throw new GDCException("Error in constructor FightView(WeightClass weightClass) " + exc.Message);
+                throw new Exception("Error in constructor FightView(WeightClass weightClass) " + exc.Message);
             }
         }
 
@@ -82,7 +82,7 @@ namespace GoldenDragonCup.View
             }
             catch (Exception exc)
             {
-                throw new GDCException("Error in constructor FightView(Fighter, Fighter, WeightClass) " + exc.Message);
+                throw new Exception("Error in constructor FightView(Fighter, Fighter, WeightClass) " + exc.Message);
             }
         }
 
@@ -116,7 +116,7 @@ namespace GoldenDragonCup.View
                 btn_fighter1 = new Button();
                 btn_fighter1.Width = 90;
                 btn_fighter1.Height = 25;
-                btn_fighter1.FontSize = 12;
+                btn_fighter1.FontSize = 11;
                 btn_fighter1.Foreground = Brushes.Red;
                 btn_fighter1.FontWeight = FontWeights.Bold;             
                 btn_fighter1.Content = "  ***  ";
@@ -124,7 +124,7 @@ namespace GoldenDragonCup.View
                 btn_fighter2 = new Button();
                 btn_fighter2.Width = 90;
                 btn_fighter2.Height = 25;
-                btn_fighter2.FontSize = 12;
+                btn_fighter2.FontSize = 11;
                 btn_fighter2.FontWeight = FontWeights.Bold;               
                 btn_fighter2.Content = "  ***  ";
 
@@ -184,7 +184,7 @@ namespace GoldenDragonCup.View
             }
             catch (Exception exc)
             {
-                throw new GDCException("Error in method initialise() " + exc.Message);
+                throw new Exception("Error in method initialise() " + exc.Message);
             }
         }
 
@@ -369,7 +369,7 @@ namespace GoldenDragonCup.View
             }
             catch (Exception exc)
             {
-                throw new GDCException("Error in method FighterToNextRound(Fighter fighter): " + exc.Message);
+                throw new Exception("Error in method FighterToNextRound(Fighter fighter): " + exc.Message);
             }
         }
 
@@ -468,7 +468,7 @@ namespace GoldenDragonCup.View
             }
             catch (Exception exc)
             {
-                throw new GDCException("Error in method override string ToString(): " + exc.Message);
+                throw new Exception("Error in method override string ToString(): " + exc.Message);
             }
         }
 
@@ -479,7 +479,8 @@ namespace GoldenDragonCup.View
             try
             {
                 this.fighter1 = fighter;
-                btn_fighter1.Content = fighter1.lastName + " " + fighter1.firstName[0];
+                btn_fighter1.Content = nameHelper(fighter1.lastName) + " " + fighter1.firstName[0];
+
             }
             catch (Exception exc)
             {
@@ -492,7 +493,7 @@ namespace GoldenDragonCup.View
             try
             {
                 this.fighter2 = fighter;
-                btn_fighter2.Content = fighter2.lastName + " " + fighter2.firstName[0];
+                btn_fighter2.Content = nameHelper(fighter2.lastName) + " " + fighter2.firstName[0];
             }
             catch (Exception exc)
             {
@@ -513,6 +514,49 @@ namespace GoldenDragonCup.View
         public void setHeader(string header)
         {
             this.Header = header;
+        }
+
+        //method checks of last name consists of more than one word
+        //first name is written in full, second name is abreviated to 1 char
+        //if name is longer than 10 chars it is also abbreviated to 10 chars
+        private string nameHelper(string name)
+        {
+            try
+            {
+                string adjustedName = null;
+
+                if (name.Length > 12) //name is longer than 12 chars
+                {
+                    if (name.Contains(" "))
+                    {
+                        string trimmed = name.Replace(@" ", ""); //remove spaces in the last name + abbreviate to 12 chars
+
+                        if (trimmed.Length > 12) //if length is still over 12 after trimming
+                        {
+                            adjustedName = trimmed.Substring(0, 11);
+                        }
+                        else
+                        {
+                            return trimmed;
+                        }
+                    }
+                    else
+                    {
+                        adjustedName = name.Substring(0, 11); //abbreviate to 12 chars
+                    }
+                    
+                    return adjustedName + ".";
+                                    
+                }           
+                else
+                {
+                    return name;
+                }
+            }
+            catch (Exception exc)
+            {
+                throw new Exception("Error in method nameHelper(string name): " + exc.Message);
+            }
         }
     }
 }
