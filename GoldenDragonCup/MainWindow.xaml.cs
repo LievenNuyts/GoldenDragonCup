@@ -111,13 +111,7 @@ namespace GoldenDragonCup
                             ScrollViewer viewer = (ScrollViewer)tab.Content;
                             Grid grid = (Grid)viewer.Content;
 
-                            setRows(grid, weightClass);
-
-                            //set first round in column 1
-                            //fightViewPerRoundPositioner(grid, weightClass.rounds[0], 1, 1, 2);
-
-                            //set other columns
-                            //positionFightViews(grid, weightClass);
+                            setRows(grid, weightClass);                        
                         }
                     }
                 }
@@ -587,8 +581,8 @@ namespace GoldenDragonCup
 
             return fighters;*/
 
-            return createFightersUpTo10();
-            //return createFightersUpTo20();
+            //return createFightersUpTo10();
+            return createFightersUpTo20();
 
         }
 
@@ -664,6 +658,7 @@ namespace GoldenDragonCup
             ArrayList fighters = new ArrayList();
 
             //create fighters 11-20
+            
             for (int i = 1; i < 12; i++)
             {
                 Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +55");
@@ -688,12 +683,14 @@ namespace GoldenDragonCup
                 fighters.Add(fighter);
             }
 
+            
             for (int i = 1; i < 16; i++)
             {
                 Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +75");
                 fighters.Add(fighter);
             }
 
+            
             for (int i = 1; i < 17; i++)
             {
                 Fighter fighter = new Fighter("Fighter", i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +80");
