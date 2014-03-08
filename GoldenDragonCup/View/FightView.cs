@@ -21,9 +21,6 @@ namespace GoldenDragonCup.View
     {
 
         public WeightClass weightClass;
-        
-        //public int fightCounter; // int to count the fights in a weightclass, also used for header of groupBox.
-
         private Fighter fighter1;
         private Fighter fighter2; 
         public Fighter winner;
@@ -51,10 +48,9 @@ namespace GoldenDragonCup.View
         }
 
         public Button btn_fighter1, btn_fighter2, btn_confirm;
-        //public Label lbl_winner;
-        //public TextBox txtb_winner;
         public Grid grid;
-   
+
+
         //constructor based on weightclass
         public FightView(WeightClass weightClass)
         {
@@ -70,23 +66,7 @@ namespace GoldenDragonCup.View
             }
         }
 
-        //constructor based on two fighter ID's, weightclass' current roundIndex, weightClass, tournament and fightCounter
-        public FightView(Fighter fighter1, Fighter fighter2, WeightClass weightClass)
-        {
-            try
-            {
-                this.fighter1 = fighter1;
-                this.fighter2 = fighter2;            
-                this.weightClass = weightClass;                 
-                initialise();
-            }
-            catch (Exception exc)
-            {
-                throw new Exception("Error in constructor FightView(Fighter, Fighter, WeightClass) " + exc.Message);
-            }
-        }
-
-
+     
         //method to initialise components and define layout
         public void initialise()
         {
@@ -96,21 +76,6 @@ namespace GoldenDragonCup.View
                 this.Foreground = Brushes.White;
                 this.Width = 130;
                 this.Height = 80;
-
-                /*
-                //initialise label
-                lbl_winner = new Label();
-                lbl_winner.FontSize = 10;
-                lbl_winner.Content = "        Winner:";
-                lbl_winner.FontWeight = FontWeights.Bold;
-                lbl_winner.Width = 70;
-                lbl_winner.Height = 25;
-
-                //initialise textbox
-                txtb_winner = new TextBox();
-                txtb_winner.Width = 70;
-                txtb_winner.Height = 28;
-                txtb_winner.FontWeight = FontWeights.Bold;*/
 
                 //initialise buttons
                 btn_fighter1 = new Button();
@@ -150,11 +115,7 @@ namespace GoldenDragonCup.View
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(90.0) });
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(25.0) });
 
-
-                //grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(4.0) });
-                //grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(28.0) });
                 grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(30.0) });
-                //grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(5.0) });
                 grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(30.0) });
 
                 //add buttons and labels to grid
@@ -164,16 +125,7 @@ namespace GoldenDragonCup.View
 
                 grid.Children.Add(btn_fighter2);
                 Grid.SetColumn(btn_fighter2, 0);
-                Grid.SetRow(btn_fighter2, 1);
-
-                /*
-                grid.Children.Add(lbl_winner);
-                Grid.SetColumn(lbl_winner, 0);
-                Grid.SetRow(lbl_winner, 2);
-
-                grid.Children.Add(txtb_winner);
-                Grid.SetColumn(txtb_winner, 1);
-                Grid.SetRow(txtb_winner, 2);*/
+                Grid.SetRow(btn_fighter2, 1);              
 
                 grid.Children.Add(btn_confirm);
                 Grid.SetColumn(btn_confirm, 1);
@@ -189,7 +141,8 @@ namespace GoldenDragonCup.View
         }
 
 
-        //EVENTS FOR BUTTONS
+        #region BUTTONS
+
         //left button click to select fighter 2 as the winner
         private void btn_fighter1_Click(object sender, RoutedEventArgs e)
         {       
@@ -318,6 +271,11 @@ namespace GoldenDragonCup.View
             }
         }
 
+        #endregion
+
+
+        #region METHODS TO TRANSFER FIGHTERS TO NEXT FIGHT
+
         //method that transfers winner to next round
         private void FighterToNextRound(Fighter fighter)
         {
@@ -379,6 +337,8 @@ namespace GoldenDragonCup.View
             }
         }
 
+
+        //method to set the fighters for the small and big final
         private void finalFightsHelper(int currentRoundIndex, Fighter loser)
         {
             try
@@ -410,6 +370,10 @@ namespace GoldenDragonCup.View
             }
         }
 
+        #endregion
+
+
+        #region METHODS FOR VISUALISATION
 
         //method to make a string summary of the fight for the fightoverview pane
         public override string ToString()
@@ -478,8 +442,54 @@ namespace GoldenDragonCup.View
             }
         }
 
+        //method checks of last name consists of more than one word
+        //first name is written in full, second name is abreviated to 1 char
+        //if name is longer than 10 chars it is also abbreviated to 10 chars
+        private string nameHelper(string name)
+        {
+            try
+            {
+                string adjustedName = null;
 
-        //setter methodes
+                if (name.Length > 12) //name is longer than 12 chars
+                {
+                    if (name.Contains(" "))
+                    {
+                        string trimmed = name.Replace(@" ", ""); //remove spaces in the last name + abbreviate to 12 chars
+
+                        if (trimmed.Length > 12) //if length is still over 12 after trimming
+                        {
+                            adjustedName = trimmed.Substring(0, 11);
+                        }
+                        else
+                        {
+                            return trimmed;
+                        }
+                    }
+                    else
+                    {
+                        adjustedName = name.Substring(0, 11); //abbreviate to 12 chars
+                    }
+
+                    return adjustedName + ".";
+
+                }
+                else
+                {
+                    return name;
+                }
+            }
+            catch (Exception exc)
+            {
+                throw new Exception("Error in method nameHelper(string name): " + exc.Message);
+            }
+        }
+
+        #endregion
+
+
+        #region GETTERS & SETTERS
+        
         public void setFighter1(Fighter fighter)
         {
             try
@@ -522,47 +532,6 @@ namespace GoldenDragonCup.View
             this.Header = header;
         }
 
-        //method checks of last name consists of more than one word
-        //first name is written in full, second name is abreviated to 1 char
-        //if name is longer than 10 chars it is also abbreviated to 10 chars
-        private string nameHelper(string name)
-        {
-            try
-            {
-                string adjustedName = null;
-
-                if (name.Length > 12) //name is longer than 12 chars
-                {
-                    if (name.Contains(" "))
-                    {
-                        string trimmed = name.Replace(@" ", ""); //remove spaces in the last name + abbreviate to 12 chars
-
-                        if (trimmed.Length > 12) //if length is still over 12 after trimming
-                        {
-                            adjustedName = trimmed.Substring(0, 11);
-                        }
-                        else
-                        {
-                            return trimmed;
-                        }
-                    }
-                    else
-                    {
-                        adjustedName = name.Substring(0, 11); //abbreviate to 12 chars
-                    }
-                    
-                    return adjustedName + ".";
-                                    
-                }           
-                else
-                {
-                    return name;
-                }
-            }
-            catch (Exception exc)
-            {
-                throw new Exception("Error in method nameHelper(string name): " + exc.Message);
-            }
-        }
+        #endregion  
     }
 }

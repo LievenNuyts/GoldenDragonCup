@@ -29,7 +29,6 @@ namespace GoldenDragonCup
         public Tournament tournament;
         public List<Fighter> allFighters;
         public string excelFile;
-        //static Random random;
 
         public MainWindow()
         {

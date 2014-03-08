@@ -8,13 +8,6 @@ using GoldenDragonCup.View;
 using System.Windows;
 
 
-
-
-
-
-
-
-
 namespace GoldenDragonCup
 {
     public class WeightClass
@@ -65,23 +58,26 @@ namespace GoldenDragonCup
             }
         }
 
+
+        #region METHODS FOR FIGHTVIEWS
+
         //methode that generates Fightview lists and adds fightviews to each list depending on number of fighters
         public void createFightViews()
         {
             try
             {
                 //initialise fightview list per round that will be used based on count of fighters in weightclass     
-                
+
                 createRounds(1);
                 if (weightClassFighters.Count() > 2)
-                    {createRounds(2);}
+                { createRounds(2); }
                 if (weightClassFighters.Count() > 4)
-                    {createRounds(1);}
+                { createRounds(1); }
                 if (weightClassFighters.Count() > 8)
-                    {createRounds(1);}
+                { createRounds(1); }
                 if (weightClassFighters.Count() > 16)
-                    {createRounds(1);}
-                
+                { createRounds(1); }
+
 
                 //create fightviews and assign to proper round lists based on amount of fighters in weightclass
                 switch (weightClassFighters.Count())
@@ -145,7 +141,7 @@ namespace GoldenDragonCup
                         break;
                     default:
                         throw new GDCException("Invalid number of fighters in weightclass " + this.category + ": " +
-                                                    weightClassFighters.Count().ToString());                     
+                                                    weightClassFighters.Count().ToString());
                 }
             }
             catch (Exception exc)
@@ -153,7 +149,7 @@ namespace GoldenDragonCup
                 throw new Exception("Error in method createFightViews() " + exc.Message);
             }
         }
-
+        
         //method to generate List<FightView> rounds and add them to ArrayList 'rounds'
         private void createRounds(int amount)
         {
@@ -162,8 +158,8 @@ namespace GoldenDragonCup
                 List<FightView> round = new List<FightView>();
                 rounds.Add(round);
             }
-        }
-
+        }    
+        
         //method creates fightView and adds it to list provided as parameter. 
         //method also sets the title of round number, final, ...
         public void addFightViewToRound(List<FightView> list)
@@ -243,70 +239,7 @@ namespace GoldenDragonCup
             }
         }
 
-        /*
-        public void assignFightersToFightViews()
-        {
-            try
-            {
-                if (weightClassFighters.Count == 3) //round robin
-                {
-                    FightView fvRound1 = rounds[0][0];
-                    fvRound1.setFighter1(weightClassFighters[0]);
-                    fvRound1.setFighter2(weightClassFighters[1]);
-
-                    FightView fvRound2 = rounds[1][0];
-                    fvRound2.setFighter1(weightClassFighters[0]);
-                    fvRound2.setFighter2(weightClassFighters[2]);
-
-                    FightView fvRound3 = rounds[2][0];
-                    fvRound3.setFighter1(weightClassFighters[1]);
-                    fvRound3.setFighter2(weightClassFighters[2]);
-                }
-                else //not round robin
-                {
-                    //assign fighters to the first round
-                    foreach (FightView fightView in (List<FightView>)rounds[0])
-                    {
-                        if (fightView.getFighter1() == null)
-                        {
-                            fightView.setFighter1(selectFreeFighter(freeFighterList()));
-                        }
-
-                        if (fightView.getFighter2() == null)
-                        {
-                            fightView.setFighter2(selectFreeFighter(freeFighterList()));
-                        }
-                    }
-
-                    List<Fighter> freeFighters = freeFighterList();
-
-                    //assign fighters to second round if needed
-                    if (freeFighters.Count > 0)
-                    {
-                        foreach (FightView fightView in (List<FightView>)rounds[1])
-                        {
-                            freeFighters = freeFighterList();
-
-                            if (freeFighters.Count >= 1 && fightView.getFighter1() == null)
-                            {
-                                fightView.setFighter1(selectFreeFighter(freeFighterList()));
-                            }
-
-                            if (freeFighters.Count > 1 && fightView.getFighter2() == null)
-                            {
-                                fightView.setFighter2(selectFreeFighter(freeFighterList()));
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception exc)
-            {
-                throw new Exception("Error in method testMethodToAssignFightersToFightViews() " + exc.Message);
-            }
-        }*/
-
-        
+        //method to submit fighters in each fight view for the first fights
         public void assignFightersToFightViews()
         {
             try
@@ -381,6 +314,9 @@ namespace GoldenDragonCup
                 throw new Exception("Error in method assignFightersToFightViews() " + exc.Message);
             }
         }
+
+
+        #endregion
 
 
         #region METHODS TO PAIR FIGHTERS AND SELECT FREE FIGHTERS
