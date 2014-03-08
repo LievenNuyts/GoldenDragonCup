@@ -452,6 +452,7 @@ namespace GoldenDragonCup
                     createTabsforWeightClasses();
                     createTrees();
                     fightViewsToListBox();
+                    showImport();
                 }
             }
             catch (Exception exc)
@@ -549,12 +550,33 @@ namespace GoldenDragonCup
                     Fighter newFighter = new Fighter(firstName, lastName, club, clubLocation, category);
                     allFighters.Add(newFighter);         
                 }
+
+                
+             
             }
             catch (Exception exc)
             {
                 MessageBox.Show("Error in method readFightersFromFile(): " + exc.Message);
                 throw new GDCException("Error in method readFightersFromFile(): " + exc.Message);
             }
+        }
+
+
+        //method to display messagebox with overview of imported weigtclasses, amount of fighters / weightclass and total amount
+        private void showImport()
+        {               
+            string message = "Import overview:\n";
+            int counter = 0;
+
+            foreach(WeightClass weightClass in tournament.weightClasses)
+            {
+                message += weightClass.ToString() + "\n";
+                counter += weightClass.weightClassFighters.Count;
+            }
+
+            message += "\nTotal fighter import: " + counter.ToString();
+
+            MessageBox.Show(message);
         }
 
 

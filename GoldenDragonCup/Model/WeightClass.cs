@@ -561,5 +561,18 @@ namespace GoldenDragonCup
         }
 
         #endregion
+
+        //method showing weightclass category and number of fighters in weightclass
+        public override string ToString()
+        {
+            string spaces = ": \t";
+
+            if (category.Length == 8)
+            {
+                spaces = ":  \t";
+            }
+            
+            return category + spaces + weightClassFighters.Count.ToString();
+        }
     }
 }
