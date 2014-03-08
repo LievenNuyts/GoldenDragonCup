@@ -385,8 +385,9 @@ namespace GoldenDragonCup
             int index = lstb_fights.SelectedIndex;
 
             if (up) //if true goes one up
-            {
+            {       
                 index++;
+
             }
             else //if false goes one down
             {
@@ -404,33 +405,52 @@ namespace GoldenDragonCup
         //method that 'colors' the tab and fightview of the current active fight
         public void makeItGlow(FightView fightViewNew, FightView fightViewOld)
         {
-            //remove color from previous active tab
-            foreach (TabItem item in tabControl.Items)
+            try
             {
-                item.ClearValue(TabItem.BackgroundProperty);           
-            }
-
-            //color the tabtext of the active fight
-            foreach (TabItem item in tabControl.Items)
-            {
-                if (item.Header.ToString() == fightViewNew.weightClass.category)
+                if (fightViewNew == null && fightViewOld != null)
                 {
-                    item.Background = Brushes.Gold;
-                }                    
-            }
+                    throw new GDCException("Tournament complete!");
+                }
 
-            //color the active fight
-            if (fightViewNew != null)
+
+                //remove color from previous active tab
+                foreach (TabItem item in tabControl.Items)
+                {
+                    item.ClearValue(TabItem.BackgroundProperty);
+                }
+
+                //color the tabtext of the active fight
+                foreach (TabItem item in tabControl.Items)
+                {
+                    if (item.Header.ToString() == fightViewNew.weightClass.category)
+                    {
+                        item.Background = Brushes.Gold;
+                    }              
+                }
+
+                //color the active fight
+                if (fightViewNew != null)
+                {
+                    fightViewNew.INPROGRESS = true;
+                }
+
+                //remove color from previous active fight
+                if (fightViewOld != null)
+                {
+                    fightViewOld.INPROGRESS = false;
+                }
+            }
+            catch (GDCException exc)
             {
-                fightViewNew.INPROGRESS = true;
+                MessageBox.Show(exc.Message);              
             }
-
-            //remove color from previous active fight
-            if (fightViewOld != null)
-            {         
-                fightViewOld.INPROGRESS = false;
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error in method makeItGlow(params): " + exc.Message);
+                throw new GDCException("Error in method makeItGlow(params): " + exc.Message);
             }
         }
+
 
         #endregion
 
@@ -447,8 +467,8 @@ namespace GoldenDragonCup
                 if (excelFile != null)
                 {
                     readFightersFromFile(excelFile);
-                    tournament = new Tournament("Golden Dragon Cup 2014", allFighters, this);
-                    //tournament = new Tournament("Golden Dragon Cup 2014", createTestFighters(), this);
+                    //tournament = new Tournament("Golden Dragon Cup 2014", allFighters, this);
+                    tournament = new Tournament("Golden Dragon Cup 2014", createTestFighters(), this);
                     createTabsforWeightClasses();
                     createTrees();
                     fightViewsToListBox();
@@ -655,10 +675,10 @@ namespace GoldenDragonCup
         #region TEST METHODS
 
         //method to create test fighters (not from excel file)
-        private ArrayList createTestFighters()
+        private List<Fighter> createTestFighters()
         {
             /*
-            ArrayList fighters = new ArrayList();
+            List<Fighter> fighters = new List<Fighter>();
             
             Fighter fighter1 = new Fighter("Jan", "Jansens", "Long Hu Men", "Leuven, Belgium", "FC M +65");
             fighters.Add(fighter1);
@@ -696,15 +716,15 @@ namespace GoldenDragonCup
 
             return fighters;*/
 
-            //return createFightersUpTo10();
-            return createFightersUpTo20();
+            return createFightersUpTo10();
+            //return createFightersUpTo20();
 
         }
 
         //Test method to create testfighters groups of 2 to 10
-        public ArrayList createFightersUpTo10()
+        public List<Fighter> createFightersUpTo10()
         {
-            ArrayList fighters = new ArrayList();
+            List<Fighter> fighters = new List<Fighter>();
 
             //create fighters 2 - 10
             
@@ -713,7 +733,7 @@ namespace GoldenDragonCup
                 Fighter fighter = new Fighter(" ", "Fighter" + i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +55");
                 fighters.Add(fighter);
             }
-
+            
             for (int i = 1; i < 4; i++)
             {
                 Fighter fighter = new Fighter(" ", "Fighter" + i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +60");
@@ -724,7 +744,7 @@ namespace GoldenDragonCup
             {
                 Fighter fighter = new Fighter(" ", "Fighter" + i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +65");
                 fighters.Add(fighter);
-            }
+            }/*
 
             for (int i = 1; i < 6; i++)
             {
@@ -762,15 +782,15 @@ namespace GoldenDragonCup
             {
                 Fighter fighter = new Fighter(" ", "Fighter" + i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +95");
                 fighters.Add(fighter);
-            }
+            }*/
 
             return fighters;
         }
 
         //Test method to create testfighters groups of 10 to 20
-        public ArrayList createFightersUpTo20()
+        public List<Fighter> createFightersUpTo20()
         {
-            ArrayList fighters = new ArrayList();
+            List<Fighter> fighters = new List<Fighter>();
 
             //create fighters 11-20
             
@@ -780,6 +800,7 @@ namespace GoldenDragonCup
                 fighters.Add(fighter);
             }
 
+            
             for (int i = 1; i < 13; i++)
             {
                 Fighter fighter = new Fighter(" ", "Fighter" + i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +60");

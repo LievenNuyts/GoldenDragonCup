@@ -53,6 +53,8 @@ namespace GoldenDragonCup
             }
         }
 
+        #region METHODS FOR VALIDATION
+
         //method to check if a weightclass has less than 2 or more than 20 fighters
         private void validateWeightClasses()
         {
@@ -80,6 +82,11 @@ namespace GoldenDragonCup
                 }         
             }
         }
+
+        #endregion
+
+
+        #region METHODS FOR WEIGHTCLASSES
 
         //method to create a new weightclass based on parameters and add to the list of weightclasses
         private void addWeightClasses()
@@ -114,5 +121,7 @@ namespace GoldenDragonCup
                 weightClass.selectTournamentFighters();
             }
         }
+
+        #endregion
     }
 }
