@@ -208,7 +208,10 @@ namespace GoldenDragonCup.View
         //right button click to show info about fighter 1
         private void btn_fighter1_RightClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(fighter1.ToString());
+            if (fighter1 != null)
+            {
+                MessageBox.Show(fighter1.ToString());
+            }
         }
    
         //left button click to select fighter 2 as the winner
@@ -228,7 +231,10 @@ namespace GoldenDragonCup.View
         //right button click to show info about fighter 2
         private void btn_fighter2_RightClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(fighter2.ToString());
+            if (fighter2 != null)
+            {
+                MessageBox.Show(fighter2.ToString());
+            }
         }
    
 
