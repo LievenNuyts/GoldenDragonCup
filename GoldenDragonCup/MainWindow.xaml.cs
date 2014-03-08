@@ -27,7 +27,7 @@ namespace GoldenDragonCup
     {
         
         public Tournament tournament;
-        public ArrayList allFighters;
+        public List<Fighter> allFighters;
         public string excelFile;
         //static Random random;
 
@@ -36,7 +36,7 @@ namespace GoldenDragonCup
             try
             {
                 InitializeComponent();
-                allFighters = new ArrayList();
+                allFighters = new List<Fighter>();
             }
             catch (Exception exc)
             {
@@ -50,6 +50,7 @@ namespace GoldenDragonCup
         {
             try
             {
+                //add a tab for each weightClass
                 foreach (WeightClass weightClass in tournament.weightClasses)
                 {
                     TabItem tab = new TabItem();

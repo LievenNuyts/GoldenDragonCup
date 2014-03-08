@@ -72,10 +72,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\GDCException.cs" />
+    <Compile Include="Tools\WCComparator.cs" />
     <Compile Include="Tools\idManager.cs" />
     <Compile Include="Model\Tournament.cs" />
     <Compile Include="Model\WeightClass.cs" />
     <Compile Include="View\FightView.cs" />
+    <Compile Include="View\NextFightPopup.xaml.cs">
+      <DependentUpon>NextFightPopup.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -92,6 +96,10 @@
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\NextFightPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

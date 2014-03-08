@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 using System.Text;
+using GoldenDragonCup.Tools;
 
 namespace GoldenDragonCup
 {
@@ -10,23 +11,22 @@ namespace GoldenDragonCup
     {
         public MainWindow window;
         public string name;
-        public ArrayList weightClassCodes;
-        public ArrayList weightClasses; //list of the weightclasses that are available in the competition
-        public ArrayList allFighters; //list of all the fighters who have entered the competition
+        public List<string> weightClassCodes;
+        public List<WeightClass> weightClasses; //list of the weightclasses that are available in the competition
+        public List<Fighter> allFighters; //list of all the fighters who have entered the competition
 
         public Tournament() { }
 
-        public Tournament(string name, ArrayList allFighters, MainWindow window)
+        public Tournament(string name, List<Fighter> allFighters, MainWindow window)
         {
             try
             {
-
                 this.window = window;
                 this.name = name;
                 this.allFighters = allFighters;
                 
-                this.weightClassCodes = new ArrayList();
-                this.weightClasses = new ArrayList();
+                this.weightClassCodes = new List<string>();
+                this.weightClasses = new List<WeightClass>();
 
                 this.extractWeightClassCodes();
                 this.addWeightClasses();
@@ -42,6 +42,10 @@ namespace GoldenDragonCup
                 //or no fightViews created
                 validateWeightClasses();
                 validateFightViews();
+
+                //sort the weightclasses in the tournament based on the WCComparator
+                WCComparator comparator = new WCComparator();
+                weightClasses.Sort(comparator);  
             }
             catch (Exception exc)
             {
