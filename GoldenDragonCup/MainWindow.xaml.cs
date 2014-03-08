@@ -69,7 +69,7 @@ namespace GoldenDragonCup
                     //add rows to grid
                     grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(15.0) });
 
-                    for (int i = 0; i < 9; i++)
+                    for (int i = 0; i < 10; i++)
                     {
                         grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(80.0) });
                     }
@@ -219,12 +219,21 @@ namespace GoldenDragonCup
                 {
                     List<FightView> quatreFinal = weightClass.rounds[weightClass.rounds.Count - 4];
 
+                    /*
                     for (int i = 0, y = 2; i < quatreFinal.Count; i++, y += 2)
                     {
                         grid.Children.Add(quatreFinal[i]);
                         Grid.SetColumn(quatreFinal[i], 5);
                         Grid.SetRow(quatreFinal[i], y);
+                    }*/
+
+                    for (int i = quatreFinal.Count - 1, y = 8; i >= 0; i--, y -= 2)
+                    {
+                        grid.Children.Add(quatreFinal[i]);
+                        Grid.SetColumn(quatreFinal[i], 5);
+                        Grid.SetRow(quatreFinal[i], y);
                     }
+
                 }
             }
             catch (Exception exc)
@@ -245,11 +254,24 @@ namespace GoldenDragonCup
                 {
                     List<FightView> eighthFinal = weightClass.rounds[weightClass.rounds.Count - 5];
 
+                    /*
                     for (int i = 0, y = 1; i < eighthFinal.Count; i++, y++)
                     {
                         if (y == 5)
                         {
                             y++;
+                        }
+
+                        grid.Children.Add(eighthFinal[i]);
+                        Grid.SetColumn(eighthFinal[i], 3);
+                        Grid.SetRow(eighthFinal[i], y);
+                    }*/
+
+                    for (int i = eighthFinal.Count - 1, y = 9; i >= 0; i--, y--)
+                    {
+                        if (y == 5)
+                        {
+                            y--;
                         }
 
                         grid.Children.Add(eighthFinal[i]);
@@ -275,8 +297,15 @@ namespace GoldenDragonCup
                 if (weightClass.rounds.Count == 6)
                 {
                     List<FightView> selectionRound = weightClass.rounds[weightClass.rounds.Count - 6];
-
+                    /*
                     for (int i = 0, y = 2; i < selectionRound.Count; i++, y += 2)
+                    {
+                        grid.Children.Add(selectionRound[i]);
+                        Grid.SetColumn(selectionRound[i], 1);
+                        Grid.SetRow(selectionRound[i], y);
+                    }*/
+
+                    for (int i = selectionRound.Count - 1, y = 10; i >= 0; i--, y -= 1)
                     {
                         grid.Children.Add(selectionRound[i]);
                         Grid.SetColumn(selectionRound[i], 1);
@@ -716,8 +745,8 @@ namespace GoldenDragonCup
 
             return fighters;*/
 
-            return createFightersUpTo10();
-            //return createFightersUpTo20();
+            //return createFightersUpTo10();
+            return createFightersUpTo20();
 
         }
 
@@ -744,7 +773,7 @@ namespace GoldenDragonCup
             {
                 Fighter fighter = new Fighter(" ", "Fighter" + i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +65");
                 fighters.Add(fighter);
-            }/*
+            }
 
             for (int i = 1; i < 6; i++)
             {
@@ -782,7 +811,7 @@ namespace GoldenDragonCup
             {
                 Fighter fighter = new Fighter(" ", "Fighter" + i.ToString(), "Long Hu Men", "Leuven, Belgium", "FC M +95");
                 fighters.Add(fighter);
-            }*/
+            }
 
             return fighters;
         }
