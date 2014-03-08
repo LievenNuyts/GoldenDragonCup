@@ -400,6 +400,10 @@ namespace GoldenDragonCup
                 }
 
                 makeItGlow(fightViewNew, fightViewOld);
+                
+                //show next fight popup
+                NextFightPopup popup = new NextFightPopup(fightViewNew, fightViewOld);
+                popup.Show();
             }
             catch (Exception exc)
             {
@@ -496,8 +500,8 @@ namespace GoldenDragonCup
                 if (excelFile != null)
                 {
                     readFightersFromFile(excelFile);
-                    //tournament = new Tournament("Golden Dragon Cup 2014", allFighters, this);
-                    tournament = new Tournament("Golden Dragon Cup 2014", createTestFighters(), this);
+                    tournament = new Tournament("Golden Dragon Cup 2014", allFighters, this);
+                    //tournament = new Tournament("Golden Dragon Cup 2014", createTestFighters(), this);
                     createTabsforWeightClasses();
                     createTrees();
                     fightViewsToListBox();
