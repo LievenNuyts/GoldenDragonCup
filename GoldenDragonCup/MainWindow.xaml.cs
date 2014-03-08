@@ -371,6 +371,7 @@ namespace GoldenDragonCup
         {
             FightView fightViewNew = null;
             FightView fightViewOld = null;
+            FightView fightViewPrepare = null;
             
             try
             {
@@ -396,6 +397,11 @@ namespace GoldenDragonCup
                                     fightViewNew = fightView;
                                 }
 
+                                if (counter == index + 1)
+                                {
+                                    fightViewPrepare = fightView;
+                                }
+
                                 counter++;
                             }
                         }
@@ -405,7 +411,7 @@ namespace GoldenDragonCup
                 makeItGlow(fightViewNew, fightViewOld);
                 
                 //show next fight popup
-                NextFightPopup popup = new NextFightPopup(fightViewNew, fightViewOld);
+                NextFightPopup popup = new NextFightPopup(fightViewNew, fightViewPrepare);
                 popup.Show();
             }
             catch (Exception exc)
