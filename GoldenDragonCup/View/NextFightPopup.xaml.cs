@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GoldenDragonCup.Tools;
 
 
 namespace GoldenDragonCup.View
@@ -24,25 +25,49 @@ namespace GoldenDragonCup.View
 
         public NextFightPopup(FightView nextFight, FightView getReady)
         {
-
-            if (nextFight == null && getReady == null)
+            try
             {
-                this.Close();
+                if (nextFight == null && getReady == null)
+                {
+                    this.Close();
+                }
+                
+                this.nextFight = nextFight;
+                this.getReady = getReady;
+
+                InitializeComponent();
+
+                //set custom color to labels
+                defineColor();
+
+                //set text to labels
+                lbl_nextFightInfo.Content = nextFight.weightClass.category +
+                                            "  *  " + headerConverter(nextFight.Header.ToString());
+
+                lbl_getReadyFightInfo.Content = getReady.weightClass.category +
+                                            "  *  " + headerConverter(getReady.Header.ToString());
+
+                displayInfo();
             }
-            
-            this.nextFight = nextFight;
-            this.getReady = getReady;
-                   
-            InitializeComponent();
-
-            lbl_nextFightInfo.Content = nextFight.weightClass.category + 
-                                        "  *  " + headerConverter(nextFight.Header.ToString());
-
-            lbl_getReadyFightInfo.Content = getReady.weightClass.category +
-                                        "  *  " + headerConverter(getReady.Header.ToString());
-
-            displayInfo();
+            catch(Exception exc)
+            {
+                throw new Exception("Error in constructor NextFightPopup: " + exc.Message);
+            }
         }
+
+
+        private void defineColor()
+        {
+            Color color = Color.FromRgb(228, 34, 23);
+            SolidColorBrush lavaRed = new SolidColorBrush(color);
+
+            //set color lava red to labels 
+            this.lbl_nextFight.Foreground = lavaRed;
+            this.lbl_nextFightInfo.Foreground = lavaRed;
+            this.lbl_getReadyFightInfo.Foreground = lavaRed;
+            this.lbl_getReady.Foreground = lavaRed;
+        }
+
 
         private void displayInfo()
         {
@@ -86,7 +111,7 @@ namespace GoldenDragonCup.View
 
         private string fighterToString(Fighter fighter)
         {
-            string fighterString = fighter.lastName + "\n  " + fighter.firstName;
+            string fighterString = NameHelper.adjust(fighter.lastName) + "\n  " + NameHelper.adjust(fighter.firstName);
 
             return fighterString;
         }
@@ -98,11 +123,11 @@ namespace GoldenDragonCup.View
 
             if(text == "final")
             {
-                convertedText = "BATTLE FOR THE BRONZE";
+                convertedText = "BATTLE FOR BRONZE";
             }
             else if(text == "FINAL")
             {
-                convertedText = "BATTLE FOR THE GOLD";
+                convertedText = "BATTLE FOR GOLD";
             }
             else
             {

@@ -53,6 +53,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -72,6 +73,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\GDCException.cs" />
+    <Compile Include="Tools\NameHelper.cs" />
     <Compile Include="Tools\WCComparator.cs" />
     <Compile Include="Tools\idManager.cs" />
     <Compile Include="Model\Tournament.cs" />
@@ -153,6 +155,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\gloves1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\everlast-boxing-gloves-psd15426-png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\GDC logo new.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

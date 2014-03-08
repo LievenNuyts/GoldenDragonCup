@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GoldenDragonCup.Tools;
 
 
 namespace GoldenDragonCup.View
@@ -19,7 +20,6 @@ namespace GoldenDragonCup.View
   
     public class FightView : GroupBox //is a type of GroupBox
     {
-
         public WeightClass weightClass;
         private Fighter fighter1;
         private Fighter fighter2; 
@@ -375,7 +375,7 @@ namespace GoldenDragonCup.View
 
         #region METHODS FOR VISUALISATION
 
-        //method to make a string summary of the fight for the fightoverview pane
+        //method to make a string summary of the fight for the fightoverview panel
         public override string ToString()
         {
             try
@@ -442,6 +442,7 @@ namespace GoldenDragonCup.View
             }
         }
 
+        /*
         //method checks of last name consists of more than one word
         //first name is written in full, second name is abreviated to 1 char
         //if name is longer than 10 chars it is also abbreviated to 10 chars
@@ -483,7 +484,7 @@ namespace GoldenDragonCup.View
             {
                 throw new Exception("Error in method nameHelper(string name): " + exc.Message);
             }
-        }
+        }*/
 
         #endregion
 
@@ -495,7 +496,7 @@ namespace GoldenDragonCup.View
             try
             {
                 this.fighter1 = fighter;
-                btn_fighter1.Content = nameHelper(fighter1.lastName) + " " + fighter1.firstName[0];
+                btn_fighter1.Content = NameHelper.adjust(fighter1.lastName) + " " + fighter1.firstName[0];
 
             }
             catch (Exception exc)
@@ -509,7 +510,7 @@ namespace GoldenDragonCup.View
             try
             {
                 this.fighter2 = fighter;
-                btn_fighter2.Content = nameHelper(fighter2.lastName) + " " + fighter2.firstName[0];
+                btn_fighter2.Content = NameHelper.adjust(fighter2.lastName) + " " + fighter2.firstName[0];
             }
             catch (Exception exc)
             {

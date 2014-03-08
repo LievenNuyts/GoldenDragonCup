@@ -52,11 +52,14 @@ namespace GoldenDragonCup
                 //add a tab for each weightClass
                 foreach (WeightClass weightClass in tournament.weightClasses)
                 {
+                    Color color = Color.FromRgb(192, 64, 0);
+                    SolidColorBrush mahogany = new SolidColorBrush(color);
+                    
                     TabItem tab = new TabItem();
                     tab.Header = weightClass.category;
 
                     Grid grid = new Grid();
-                    grid.Background = Brushes.Crimson;
+                    grid.Background = mahogany;
                     grid.Height = 950;
 
                     //add columns to grid              
