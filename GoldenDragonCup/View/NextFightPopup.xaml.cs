@@ -41,11 +41,11 @@ namespace GoldenDragonCup.View
                 defineColor();
 
                 //set text to labels
-                lbl_nextFightInfo.Content = nextFight.weightClass.category +
-                                            "  *  " + headerConverter(nextFight.Header.ToString());
+                lbl_nextFightInfo.Content = "Fight nr. " + nextFight.ID + ": " + nextFight.weightClass.category +
+                                                 headerConverter(nextFight.Header.ToString());
 
-                lbl_getReadyFightInfo.Content = getReady.weightClass.category +
-                                            "  *  " + headerConverter(getReady.Header.ToString());
+                lbl_getReadyFightInfo.Content = "Fight nr. " + getReady.ID + ": " + getReady.weightClass.category +
+                                                   headerConverter(getReady.Header.ToString());
 
                 displayInfo();
             }
@@ -123,11 +123,11 @@ namespace GoldenDragonCup.View
 
             if(text == "final")
             {
-                convertedText = "BATTLE FOR BRONZE";
+                convertedText = " * BATTLE FOR BRONZE";
             }
             else if(text == "FINAL")
             {
-                convertedText = "BATTLE FOR GOLD";
+                convertedText = " * BATTLE FOR GOLD";
             }
             else
             {

@@ -28,10 +28,9 @@ namespace GoldenDragonCup
     
     public partial class MainWindow : Window
     {
-        
         public Tournament tournament;
         public List<Fighter> allFighters;
-        public string excelFile;
+        public string excelFile = null;
 
         public MainWindow()
         {
@@ -354,6 +353,7 @@ namespace GoldenDragonCup
                         {
                             foreach (FightView fightView in weightClass.rounds[i])
                             {
+                                fightView.ID = idManager.getNewFightViewId();
                                 lstb_fights.Items.Add(fightView.ToString());
 
                                 if (counter == 0)
@@ -521,7 +521,7 @@ namespace GoldenDragonCup
                 {
                     readFightersFromFile(excelFile);
                     tournament = new Tournament("Golden Dragon Cup 2014", allFighters);
-                    //tournament = new Tournament("Golden Dragon Cup 2014", createTestFighters(), this);
+                    //tournament = new Tournament("Golden Dragon Cup 2014", createTestFighters());
                     createTabsforWeightClasses();
                     createTrees();
                     fightViewsToListBox();
@@ -545,7 +545,15 @@ namespace GoldenDragonCup
         //create list with complete tournament ranking
         private void btn_createLists_Click(object sender, RoutedEventArgs e)
         {
+            if (excelFile == null)
+            {
+                excelFile = createOpenFileDialog();
+            }
 
+            foreach (WeightClass weightClass in tournament.weightClasses)
+            {
+
+            }
         }
 
 

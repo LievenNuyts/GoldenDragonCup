@@ -7,7 +7,7 @@ namespace GoldenDragonCup
 {
     public class Fighter
     {
-        public int id;
+        //public int id;
         public string firstName;
         public string lastName;
         public string club;
@@ -24,7 +24,7 @@ namespace GoldenDragonCup
 
         public Fighter(string firstName, string lastName, string club, string clubLocation, string category)
         {
-            this.id = idManager.getNewFighterId();
+            //this.id = idManager.getNewFighterId();
             this.firstName = firstName;
             this.lastName = lastName;
             this.club = club;

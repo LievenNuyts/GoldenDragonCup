@@ -22,7 +22,15 @@ namespace GoldenDragonCup.View
     public class FightView : GroupBox //is a type of GroupBox
     {
         public event fightViewEventHandler okButtonClicked;
-        
+
+        private int id;
+
+        public int ID
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
         public WeightClass weightClass;
         private Fighter fighter1;
         private Fighter fighter2; 
@@ -462,50 +470,7 @@ namespace GoldenDragonCup.View
             }
         }
 
-        /*
-        //method checks of last name consists of more than one word
-        //first name is written in full, second name is abreviated to 1 char
-        //if name is longer than 10 chars it is also abbreviated to 10 chars
-        private string nameHelper(string name)
-        {
-            try
-            {
-                string adjustedName = null;
-
-                if (name.Length > 12) //name is longer than 12 chars
-                {
-                    if (name.Contains(" "))
-                    {
-                        string trimmed = name.Replace(@" ", ""); //remove spaces in the last name + abbreviate to 12 chars
-
-                        if (trimmed.Length > 12) //if length is still over 12 after trimming
-                        {
-                            adjustedName = trimmed.Substring(0, 11);
-                        }
-                        else
-                        {
-                            return trimmed;
-                        }
-                    }
-                    else
-                    {
-                        adjustedName = name.Substring(0, 11); //abbreviate to 12 chars
-                    }
-
-                    return adjustedName + ".";
-
-                }
-                else
-                {
-                    return name;
-                }
-            }
-            catch (Exception exc)
-            {
-                throw new Exception("Error in method nameHelper(string name): " + exc.Message);
-            }
-        }*/
-
+      
         #endregion
 
 
