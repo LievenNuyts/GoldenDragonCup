@@ -23,6 +23,9 @@ namespace GoldenDragonCup
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+
+    public delegate void fightViewEventHandler(Object sender, FightViewEventArgs args);
+    
     public partial class MainWindow : Window
     {
         
@@ -328,6 +331,14 @@ namespace GoldenDragonCup
 
         #region METHODS FOR LISTBOX
 
+
+        //event for fightview ok button
+        public void onFightViewEventMethod(Object sender, FightViewEventArgs args)
+        {
+            this.oneUp(args.trueOrFalse);
+        }
+
+
         //method to populate listbox
         private void fightViewsToListBox()
         {
@@ -509,11 +520,12 @@ namespace GoldenDragonCup
                 if (excelFile != null)
                 {
                     readFightersFromFile(excelFile);
-                    tournament = new Tournament("Golden Dragon Cup 2014", allFighters, this);
+                    tournament = new Tournament("Golden Dragon Cup 2014", allFighters);
                     //tournament = new Tournament("Golden Dragon Cup 2014", createTestFighters(), this);
                     createTabsforWeightClasses();
                     createTrees();
                     fightViewsToListBox();
+                    tournament.activateFightViewEvents(this);
                     showImport();
                 }
             }
@@ -545,12 +557,13 @@ namespace GoldenDragonCup
         //method to open a filedialog to import an excel file
         private string createOpenFileDialog()
         {
+            string fileName = null;
+            
             try
-            {
+            {                      
                 // Create OpenFileDialog 
                 Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-                String filename = null;
-
+                
                 // Set filter for file extension and default file extension 
                 dlg.DefaultExt = ".txt";
                 dlg.Filter = "EXCEL Files (*.xls)|*.xlsx";
@@ -562,18 +575,18 @@ namespace GoldenDragonCup
                 if (result == true)
                 {
                     // Open document 
-                    filename = dlg.FileName;
-                }
-
-                return filename;
+                    fileName = dlg.FileName;
+                }        
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Error in method createOpenFileDialog(): " + exc.Message);
-                throw new GDCException("Error in method createOpenFileDialog(): " + exc.Message);
+                MessageBox.Show("Error in method createOpenFileDialog(): " + exc.Message);             
             }
+
+            return fileName;
         }
 
+       
         //method to import data from excel, create fighters from data and add fighters to allFighters arraylist
         private void readFightersFromFile(string file)
         {
@@ -618,8 +631,7 @@ namespace GoldenDragonCup
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Error in method readFightersFromFile(): " + exc.Message);
-                throw new GDCException("Error in method readFightersFromFile(): " + exc.Message);
+                MessageBox.Show("Error in method readFightersFromFile(): " + exc.Message);              
             }
         }
 

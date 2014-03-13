@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GoldenDragonCup.Tools;
+using GoldenDragonCup;
 
 
 namespace GoldenDragonCup.View
@@ -20,6 +21,8 @@ namespace GoldenDragonCup.View
   
     public class FightView : GroupBox //is a type of GroupBox
     {
+        public event fightViewEventHandler okButtonClicked;
+        
         public WeightClass weightClass;
         private Fighter fighter1;
         private Fighter fighter2; 
@@ -239,8 +242,9 @@ namespace GoldenDragonCup.View
                     }
                     
                     winner = null;
-                    //adjust listbox
-                    this.weightClass.tournament.window.oneUp(false);
+                    
+                    //adjust listbox                                 
+                    this.onOkButtonClicked(false);
                 }
                 else //(btn_confirm.Content.ToString() == "OK")
                 {
@@ -255,8 +259,8 @@ namespace GoldenDragonCup.View
                         btn_confirm.Content = "X";
                         btn_confirm.Foreground = Brushes.Red;
                         
-                        //adjust listbox
-                        this.weightClass.tournament.window.oneUp(true);
+                        //adjust listbox                                             
+                        this.onOkButtonClicked(true);
                     }
                     else
                     {
@@ -268,6 +272,22 @@ namespace GoldenDragonCup.View
             {
                 ///throw new GDCException("Error in method btn_confirm_Click(): " + exc.Message);
                 MessageBox.Show("Error in method btn_confirm_Click(): " + exc.Message);
+            }
+        }
+
+        //method for ok button event, passed on to mainwindow
+        public void onOkButtonClicked(Boolean trueOrFalse)
+        {        
+            try
+            {
+                if (this.okButtonClicked != null)
+                {
+                    this.okButtonClicked(this, new FightViewEventArgs(trueOrFalse));
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
             }
         }
 

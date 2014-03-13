@@ -4,12 +4,12 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 using GoldenDragonCup.Tools;
+using GoldenDragonCup.View;
 
 namespace GoldenDragonCup
 {
     public class Tournament
     {
-        public MainWindow window;
         public string name;
         public List<string> weightClassCodes;
         public List<WeightClass> weightClasses; //list of the weightclasses that are available in the competition
@@ -19,9 +19,8 @@ namespace GoldenDragonCup
 
         //constructor with weightClass list
         //only used for data restore and tournament split afterwards
-        public Tournament(string name, List<WeightClass> weightClasses, MainWindow window)
+        public Tournament(string name, List<WeightClass> weightClasses)
         {
-            this.window = window;
             this.name = name;
             this.weightClasses = weightClasses;
         }
@@ -29,11 +28,10 @@ namespace GoldenDragonCup
 
         //constructor with fighter list
         //used for startup of a new tournament
-        public Tournament(string name, List<Fighter> allFighters, MainWindow window)
+        public Tournament(string name, List<Fighter> allFighters)
         {
             try
             {
-                this.window = window;
                 this.name = name;
                 this.allFighters = allFighters;
                 
@@ -64,6 +62,22 @@ namespace GoldenDragonCup
                 throw new Exception(exc.Message);
             }
         }
+
+        public void activateFightViewEvents(MainWindow window)
+        {
+            foreach (WeightClass weightClass in weightClasses)
+            {
+                foreach (List<FightView> list in weightClass.rounds)
+                {
+                    foreach (FightView fightView in list)
+                    {
+                        //link method to fightview event
+                        fightView.okButtonClicked += window.onFightViewEventMethod;
+                    }
+                }
+            }
+        }
+
 
         #region METHODS FOR VALIDATION
 

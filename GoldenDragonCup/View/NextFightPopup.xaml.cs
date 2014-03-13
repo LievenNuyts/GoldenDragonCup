@@ -131,7 +131,7 @@ namespace GoldenDragonCup.View
             }
             else
             {
-                convertedText = text;
+                //nothing happens (only special info for small and big final)
             }
 
             return convertedText;
