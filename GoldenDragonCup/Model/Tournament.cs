@@ -144,7 +144,7 @@ namespace GoldenDragonCup
             foreach(WeightClass weightClass in weightClasses)
             {
                 weightClass.weightClassFighters.Clear();
-                weightClass.selectTournamentFighters();
+                weightClass.selectTournamentFighters(this);
             }
         }
 

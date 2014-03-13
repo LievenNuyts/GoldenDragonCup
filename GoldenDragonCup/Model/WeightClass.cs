@@ -16,7 +16,6 @@ namespace GoldenDragonCup
         public string category;  
         public List<Fighter> weightClassFighters; //list of all fighters in this weightclass
         public List<List<FightView>> rounds; //list of lists of fightViews (the rounds)
-        public Tournament tournament;
 
         public bool inView;
 
@@ -28,7 +27,6 @@ namespace GoldenDragonCup
 
                 this.inView = false;
                 this.category = category;
-                this.tournament = tournament;
                 this.weightClassFighters = new List<Fighter>();
                 this.rounds = new List<List<FightView>>();
             }
@@ -40,11 +38,12 @@ namespace GoldenDragonCup
 
 
         //methode that select all qualified fighters from the tournament fighter list for this weightclass
-        public void selectTournamentFighters()
+        
+        public void selectTournamentFighters(Tournament tournament)
         {
             try
             {
-                foreach (Fighter fighter in this.tournament.allFighters)
+                foreach (Fighter fighter in tournament.allFighters)
                 {
                     if (fighter.category == this.category)
                     {
