@@ -632,7 +632,7 @@ namespace GoldenDragonCup
 
             foreach(WeightClass weightClass in tournament.weightClasses)
             {
-                message += weightClass.ToString() + "\n";
+                message += weightClass.fightersAndWeightClass() + "\n";
                 counter += weightClass.weightClassFighters.Count;
             }
 

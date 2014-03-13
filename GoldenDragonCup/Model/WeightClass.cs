@@ -12,21 +12,21 @@ namespace GoldenDragonCup
 {
     public class WeightClass
     {
-        public static Random random;
-        
-        public string category;
-
+        public static Random random;     
+        public string category;  
         public List<Fighter> weightClassFighters; //list of all fighters in this weightclass
         public List<List<FightView>> rounds; //list of lists of fightViews (the rounds)
-
         public Tournament tournament;
+
+        public bool inView;
 
         public WeightClass(string category, Tournament tournament)
         {
             try
             {
                 random = new Random();
-                
+
+                this.inView = false;
                 this.category = category;
                 this.tournament = tournament;
                 this.weightClassFighters = new List<Fighter>();
@@ -498,8 +498,14 @@ namespace GoldenDragonCup
 
         #endregion
 
-        //method showing weightclass category and number of fighters in weightclass
+        //method to display category when weightClass is added to a listbox
         public override string ToString()
+        {
+            return this.category;
+        }
+
+        //method showing weightclass category and number of fighters in weightclass
+        public string fightersAndWeightClass()
         {
             string spaces = ": \t";
 
@@ -507,7 +513,7 @@ namespace GoldenDragonCup
             {
                 spaces = ":  \t";
             }
-            
+
             return category + spaces + weightClassFighters.Count.ToString();
         }
     }

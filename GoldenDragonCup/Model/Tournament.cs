@@ -17,6 +17,18 @@ namespace GoldenDragonCup
 
         public Tournament() { }
 
+        //constructor with weightClass list
+        //only used for data restore and tournament split afterwards
+        public Tournament(string name, List<WeightClass> weightClasses, MainWindow window)
+        {
+            this.window = window;
+            this.name = name;
+            this.weightClasses = weightClasses;
+        }
+        
+
+        //constructor with fighter list
+        //used for startup of a new tournament
         public Tournament(string name, List<Fighter> allFighters, MainWindow window)
         {
             try

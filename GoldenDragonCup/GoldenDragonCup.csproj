@@ -82,6 +82,9 @@
     <Compile Include="View\NextFightPopup.xaml.cs">
       <DependentUpon>NextFightPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\WeightClassPicker.xaml.cs">
+      <DependentUpon>WeightClassPicker.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -100,6 +103,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\NextFightPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WeightClassPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,6 +172,7 @@
   <ItemGroup>
     <Resource Include="Images\GDC-logo-transp.gif" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

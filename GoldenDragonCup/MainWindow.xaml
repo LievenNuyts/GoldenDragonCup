@@ -6,11 +6,12 @@
         <TabControl Height="Auto" HorizontalAlignment="Stretch" Name="tabControl" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="0,0,371,0">
             <TabItem Header="Controls" Name="Controls">
                 <Grid Name="ControlGrid" Background="#FFC04000">
-                    <Button Content="New Tournament" Height="32" HorizontalAlignment="Center" Margin="93,0,-58,157" Name="btn_newTournament" VerticalAlignment="Bottom" Width="255" Click="btn_newTournament_Click" />
-                    <Button Content="Load Tournament" Height="32" HorizontalAlignment="Center" Margin="92,0,-57,110" Name="btn_savedTournament" VerticalAlignment="Bottom" Width="255" Click="btn_savedTournament_Click" />
-                    <Button Content="Create Result Lists" Height="32" HorizontalAlignment="Center" Margin="92,0,-57,62" Name="btn_createLists" VerticalAlignment="Bottom" Width="255" Click="btn_createLists_Click" />
-                    <Button Content="FIGHT" Height="32" HorizontalAlignment="Center" Margin="92,0,-57,16" Name="btn_fight" VerticalAlignment="Bottom" Width="255" />
-                    <Image Height="400" HorizontalAlignment="Center" Margin="19,42,-129,0" Name="img_GDC" Stretch="Fill" VerticalAlignment="Top" Width="400" Source="/GoldenDragonCup;component/Images/GDC-logo-transp.gif" />
+                    <Button Content="New Tournament" Height="32" HorizontalAlignment="Center" Margin="93,0,-58,190" Name="btn_newTournament" VerticalAlignment="Bottom" Width="255" Click="btn_newTournament_Click" />
+                    <Button Content="Load Tournament" Height="32" HorizontalAlignment="Center" Margin="93,0,-58,150" Name="btn_savedTournament" VerticalAlignment="Bottom" Width="255" Click="btn_savedTournament_Click" />
+                    <Button Content="Create Result Lists" Height="32" HorizontalAlignment="Center" Margin="93,0,-58,70" Name="btn_createLists" VerticalAlignment="Bottom" Width="255" Click="btn_createLists_Click" />
+                    <Button Content="FIGHT" Height="32" HorizontalAlignment="Center" Margin="93,0,-58,30" Name="btn_fight" VerticalAlignment="Bottom" Width="255" />
+                    <Button Content="Adjust displayed weightclasses" Height="32" HorizontalAlignment="Center" Margin="93,0,-58,110" Name="btn_chooseWeightClasses" VerticalAlignment="Bottom" Width="255" />
+                    <Image Height="400" HorizontalAlignment="Center" Margin="26,35,-136,0" Name="img_GDC" Stretch="Fill" VerticalAlignment="Top" Width="400" Source="/GoldenDragonCup;component/Images/GDC-logo-transp.gif" />
                 </Grid>
             </TabItem>
         </TabControl>
